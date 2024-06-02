@@ -1,8 +1,8 @@
 plugins {
-    id ("java-library")
-    id ("eclipse")
-    id ("idea")
-    id ("maven-publish")
+    `java-library`
+    eclipse
+    idea
+    `maven-publish`
     id ("net.neoforged.gradle.userdev") version ("7.0.138")
 }
 

@@ -34,6 +34,8 @@ public class ETItems {
                     .durability(10)
     );
 
+    public static final DeferredItem<Item> ENVIRONMENTAL_ESSENCE = ITEMS.registerSimpleItem("environmental_essence");
+
 
     @SuppressWarnings("unused")
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CREATE_MODE_TAB = CREATIVE_MODE_TABS.register("environmenttech", () -> CreativeModeTab.builder()
@@ -43,6 +45,7 @@ public class ETItems {
             .displayItems((parameters, output) -> {
                 output.accept(ENV_DETECTOR_ITEM.get());
                 output.accept(EXAMPLE_BLOCK_ITEM.get());
+                output.accept(ENVIRONMENTAL_ESSENCE.get());
             }).build());
 
 

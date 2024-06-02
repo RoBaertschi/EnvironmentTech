@@ -5,6 +5,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -33,6 +34,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
 import robaertschi.environmenttech.data.attachments.ETAttachments;
+import robaertschi.environmenttech.data.capabilities.ETCapabilities;
 import robaertschi.environmenttech.level.block.ETBlocks;
 import robaertschi.environmenttech.level.item.ETItems;
 
@@ -44,8 +46,9 @@ public class EnvironmentTech
     public static final String MODID = "environmenttech";
     public static final Logger LOGGER = LogUtils.getLogger();
 
-
-
+    public static ResourceLocation id(String name) {
+        return new ResourceLocation(MODID, name);
+    }
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
@@ -56,6 +59,7 @@ public class EnvironmentTech
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
         ETAttachments.init(modEventBus);
+        ETCapabilities.init(modEventBus);
         ETBlocks.init(modEventBus);
         ETItems.init(modEventBus);
 
