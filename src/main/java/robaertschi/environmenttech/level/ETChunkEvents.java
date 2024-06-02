@@ -13,16 +13,17 @@ import robaertschi.environmenttech.data.attachments.ETAttachments;
 public class ETChunkEvents {
     @SubscribeEvent()
     public static void onChunkLoad(ChunkEvent.Load event) {
+        if (event.getLevel().isClientSide()) return;
         if (event.isNewChunk() && event.getChunk() instanceof LevelChunk levelChunk && !event.getChunk().hasData(ETAttachments.ENV)) {
             if (levelChunk.getStatus() != ChunkStatus.FULL) {
                 return;
             }
             int random = event.getLevel().getRandom().nextIntBetweenInclusive(Config.minEnvForNewChunk, Config.maxEnvForNewChunk);
-            EnvironmentTech.LOGGER.info("New Chunk, set random to {}", random);
+            EnvironmentTech.LOGGER.debug("New Chunk, set random to {}", random);
             event.getChunk().setData(ETAttachments.ENV, random);
         } else if (!event.getChunk().hasData(ETAttachments.ENV)) {
             int random = event.getLevel().getRandom().nextIntBetweenInclusive(Config.minEnvForNewChunk, Config.maxEnvForNewChunk);
-            EnvironmentTech.LOGGER.info("Chunk without data, set random to {}", random);
+            EnvironmentTech.LOGGER.debug("Chunk without data, set random to {}", random);
             event.getChunk().setData(ETAttachments.ENV, random);
         }
     }
