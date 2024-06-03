@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import robaertschi.environmenttech.level.block.entity.EnvCollectorBlockEntity;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -36,6 +37,6 @@ public class EnvCollectorBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return null;
+        return new EnvCollectorBlockEntity(pPos, pState);
     }
 }
