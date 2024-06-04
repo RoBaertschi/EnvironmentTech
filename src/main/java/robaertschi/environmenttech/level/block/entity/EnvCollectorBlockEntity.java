@@ -3,15 +3,23 @@ package robaertschi.environmenttech.level.block.entity;
 import lombok.Getter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.ChunkAccess;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import robaertschi.environmenttech.data.attachments.ETAttachments;
 import robaertschi.environmenttech.data.capabilities.EnvStorage;
 import robaertschi.environmenttech.data.capabilities.EnvType;
+import robaertschi.environmenttech.data.recipes.ETRecipes;
+import robaertschi.environmenttech.data.recipes.EnvCollectorRecipe;
 
 import static robaertschi.environmenttech.EnvironmentTech.MODID;
 
@@ -27,6 +35,9 @@ public class EnvCollectorBlockEntity extends BlockEntity {
     };
 
     @Getter
+    private final RecipeWrapper recipeWrapper = new RecipeWrapper(inventory);
+
+    @Getter
     private final EnvStorage envStorage = new EnvStorage(EnvType.Chunk, 64, 0, 1) {
         @Override
         public void onContentsChanged() {
@@ -36,6 +47,10 @@ public class EnvCollectorBlockEntity extends BlockEntity {
     };
 
     private int progress = 0;
+    // Every 20 ticks, we take ENV from the current Chunk
+    private int takeEnv = 0;
+    @Nullable
+    private EnvCollectorRecipe currentRecipe = null;
 
 
     public EnvCollectorBlockEntity(BlockPos pos, BlockState state) {
@@ -76,7 +91,57 @@ public class EnvCollectorBlockEntity extends BlockEntity {
         this.inventory.setStackInSlot(1, itemStack);
     }
 
-    public static void tick(Level level, BlockPos blockPos, BlockState blockState, EnvCollectorBlockEntity envCollectorBlockEntity) {
+
+    public void serverTick(ServerLevel level, BlockPos blockPos, BlockState blockState) {
+
+        if (takeEnv <= 0) {
+            ChunkAccess currentChunk = level.getChunkAt(blockPos);
+            if (currentChunk.hasData(ETAttachments.ENV) && currentChunk.getData(ETAttachments.ENV) > 0) {
+                long received = envStorage.receiveEnv(1, false);
+                currentChunk.setData(ETAttachments.ENV, currentChunk.getData(ETAttachments.ENV) - received);
+                takeEnv = 20;
+            }
+        } else {
+            takeEnv--;
+        }
+
+        if (hasRecipe(level)) {
+            if (progress > 0 && progress < 60) {
+                progress++;
+            } else if (progress > 0) {
+                produce(level);
+                progress = 0;
+            } else {
+                assert currentRecipe != null;
+                if (envStorage.getEnvStored() >= currentRecipe.envUsed()) {
+                    envStorage.setEnvStored(envStorage.getEnvStored() - currentRecipe.envUsed());
+                    progress = 1;
+                }
+            }
+
+        }
+    }
+
+    private void produce(ServerLevel level) {
+        getInputItem().setCount(getInputItem().getCount() - 1);
+        // Is safe, as hasRecipe already checked
+        assert currentRecipe != null;
+        setOutputItem(currentRecipe.assemble(recipeWrapper, level.registryAccess()));
+    }
+
+    private boolean hasRecipe(Level level) {
+        if (currentRecipe != null) {
+            return currentRecipe.matches(recipeWrapper, level);
+        }
+        var recipe = level.getRecipeManager().getRecipeFor(ETRecipes.ENV_COLLECTOR_RECIPE_TYPE.get(), recipeWrapper, level);
+        if (recipe.isEmpty()) {
+            progress = 0;
+            return false;
+        } else {
+            currentRecipe = recipe.get().value();
+            progress = 0;
+            return true;
+        }
 
     }
 }

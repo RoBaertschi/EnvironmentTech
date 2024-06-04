@@ -19,12 +19,12 @@ public class ETChunkEvents {
                 return;
             }
             int random = event.getLevel().getRandom().nextIntBetweenInclusive(Config.minEnvForNewChunk, Config.maxEnvForNewChunk);
-            EnvironmentTech.LOGGER.debug("New Chunk, set random to {}", random);
-            event.getChunk().setData(ETAttachments.ENV, random);
+            EnvironmentTech.LOGGER.debug("New Chunk at pos {}, set random to {}", event.getChunk().getPos(), random);
+            event.getChunk().setData(ETAttachments.ENV, (long)random);
         } else if (!event.getChunk().hasData(ETAttachments.ENV)) {
             int random = event.getLevel().getRandom().nextIntBetweenInclusive(Config.minEnvForNewChunk, Config.maxEnvForNewChunk);
-            EnvironmentTech.LOGGER.debug("Chunk without data, set random to {}", random);
-            event.getChunk().setData(ETAttachments.ENV, random);
+            EnvironmentTech.LOGGER.debug("Chunk without data at pos {}, set random to {}",event.getChunk().getPos(), random);
+            event.getChunk().setData(ETAttachments.ENV, (long)random);
         }
     }
 }

@@ -8,10 +8,10 @@ import robaertschi.environmenttech.EnvironmentTech;
 import robaertschi.environmenttech.level.block.entity.ETBlockEntities;
 
 public class ETCapabilities {
-    public static final BlockCapability<IEnvStorage, EnvCapabilityContext> ENV_STORAGE_BLOCK =
+    public static final BlockCapability<IEnvStorage, EnvType> ENV_STORAGE_BLOCK =
             BlockCapability.create(EnvironmentTech.id("env_storage"),
                     IEnvStorage.class,
-                    EnvCapabilityContext.class
+                    EnvType.class
                     );
 
     public static void init(IEventBus iEventBus) {
@@ -28,7 +28,10 @@ public class ETCapabilities {
         event.registerBlockEntity(
                 ENV_STORAGE_BLOCK,
                 ETBlockEntities.ENV_COLLECTOR_BLOCK_ENTITY.get(),
-                (object, context) -> object.getEnvStorage()
+                (object, context) -> {
+                    if (context == EnvType.Chunk) return object.getEnvStorage();
+                    return null;
+                }
         );
     }
 

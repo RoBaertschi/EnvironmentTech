@@ -12,8 +12,8 @@ import java.util.function.Supplier;
 public class ETAttachments {
     private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, EnvironmentTech.MODID);
 
-    public static final Supplier<AttachmentType<Integer>> ENV = ATTACHMENT_TYPES.register(
-            "env", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    public static final Supplier<AttachmentType<Long>> ENV = ATTACHMENT_TYPES.register(
+            "env", () -> AttachmentType.builder(() -> 0L).serialize(Codec.LONG).build()
     );
 
     public static void init(IEventBus eventBus) {

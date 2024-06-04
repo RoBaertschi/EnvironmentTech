@@ -25,5 +25,10 @@ public class ETDatagen {
                 event.includeServer(),
                 new ETRecipeProvider(output, lookupProvider)
         );
+
+        generator.addProvider(
+                event.includeClient(),
+                new ETBlockStateProvider(output, existingFileHelper)
+        );
     }
 }
