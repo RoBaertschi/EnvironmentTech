@@ -13,7 +13,7 @@ public class ETBlocks {
     // Create a Deferred Register to hold Blocks which will all be registered under the "environmenttech" namespace
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
     // Creates a new Block with the id "environmenttech:example_block", combining the namespace and path
-    public static final DeferredBlock<Block> EXAMPLE_BLOCK = BLOCKS.registerSimpleBlock("example_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+//    public static final DeferredBlock<Block> EXAMPLE_BLOCK = BLOCKS.registerSimpleBlock("example_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<EnvCollectorBlock> ENV_COLLECTOR_BLOCK = BLOCKS.registerBlock("env_collector", EnvCollectorBlock::new, BlockBehaviour.Properties.of());
 
 

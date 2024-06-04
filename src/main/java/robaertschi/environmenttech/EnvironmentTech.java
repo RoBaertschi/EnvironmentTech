@@ -21,6 +21,7 @@ import robaertschi.environmenttech.data.recipes.ETRecipes;
 import robaertschi.environmenttech.level.block.ETBlocks;
 import robaertschi.environmenttech.level.block.entity.ETBlockEntities;
 import robaertschi.environmenttech.level.item.ETItems;
+import robaertschi.environmenttech.menu.ETMenus;
 
 @Mod(EnvironmentTech.MODID)
 public class EnvironmentTech
@@ -46,6 +47,7 @@ public class EnvironmentTech
         ETRecipes.init(modEventBus);
         ETAttachments.init(modEventBus);
         ETCapabilities.init(modEventBus);
+        ETMenus.init(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
 
@@ -70,14 +72,5 @@ public class EnvironmentTech
         var env = level.getChunk(event.getEntity().blockPosition()).getData(ETAttachments.ENV);
 //        event.getEntity().sendSystemMessage(Component.literal("ENV in chunk: " + env));
 
-    }
-
-    @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents
-    {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
-        }
     }
 }

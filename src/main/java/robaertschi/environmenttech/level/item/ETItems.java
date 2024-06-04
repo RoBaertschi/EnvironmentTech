@@ -13,9 +13,9 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import robaertschi.environmenttech.level.block.ETBlocks;
 
 import static robaertschi.environmenttech.EnvironmentTech.MODID;
-import static robaertschi.environmenttech.level.block.ETBlocks.EXAMPLE_BLOCK;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 public class ETItems {
@@ -25,7 +25,9 @@ public class ETItems {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
 
-    public static final DeferredItem<BlockItem> EXAMPLE_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("example_block", EXAMPLE_BLOCK);
+//    public static final DeferredItem<BlockItem> EXAMPLE_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("example_block", EXAMPLE_BLOCK);
+
+    public static final DeferredItem<BlockItem> ENV_COLLECTOR_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("env_collector", ETBlocks.ENV_COLLECTOR_BLOCK);
 
     public static final DeferredItem<EnvDetectorItem> ENV_DETECTOR_ITEM = ITEMS.registerItem("env_detector",
             EnvDetectorItem::new,
@@ -41,10 +43,11 @@ public class ETItems {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> CREATE_MODE_TAB = CREATIVE_MODE_TABS.register("environmenttech", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.environmenttech"))
             .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> ENV_DETECTOR_ITEM.get().getDefaultInstance())
+            .icon(() -> ENV_COLLECTOR_BLOCK_ITEM.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
+                output.accept(ENV_COLLECTOR_BLOCK_ITEM.get());
                 output.accept(ENV_DETECTOR_ITEM.get());
-                output.accept(EXAMPLE_BLOCK_ITEM.get());
+//                output.accept(EXAMPLE_BLOCK_ITEM.get());
                 output.accept(ENVIRONMENTAL_ESSENCE_ITEM.get());
             }).build());
 

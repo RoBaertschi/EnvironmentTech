@@ -28,6 +28,7 @@ public class ETRecipeProvider extends RecipeProvider {
         ).unlockedBy(
                 "iron_ingot",
                 InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT)
-        ).save(recipeOutput);
+        ).unlockedBy("env_collector", InventoryChangeTrigger.TriggerInstance.hasItems(ETItems.ENV_COLLECTOR_BLOCK_ITEM))
+                .save(recipeOutput);
     }
 }

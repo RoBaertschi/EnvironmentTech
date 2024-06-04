@@ -24,6 +24,13 @@ import robaertschi.environmenttech.data.recipes.EnvCollectorRecipe;
 import static robaertschi.environmenttech.EnvironmentTech.MODID;
 
 public class EnvCollectorBlockEntity extends BlockEntity {
+    public static final int SLOT_INPUT = 0;
+    public static final int SLOT_INPUT_COUNT = 1;
+
+    public static final int SLOT_OUTPUT = 0;
+    public static final int SLOT_OUTPUT_COUNT = 1;
+
+    public static final int SLOT_COUNT = SLOT_INPUT_COUNT + SLOT_OUTPUT_COUNT;
 
     @Getter
     private final ItemStackHandler inventory = new ItemStackHandler(2) {
@@ -31,6 +38,11 @@ public class EnvCollectorBlockEntity extends BlockEntity {
         protected void onContentsChanged(int slot) {
             super.onContentsChanged(slot);
             EnvCollectorBlockEntity.this.setChanged();
+        }
+
+        @Override
+        public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+            return slot < SLOT_INPUT_COUNT;
         }
     };
 

@@ -1,6 +1,16 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "env_collector": {
+      "conditions": {
+        "items": [
+          {
+            "items": "environmenttech:env_collector"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_the_recipe": {
       "conditions": {
         "recipe": "environmenttech:environmental_essence"
@@ -21,7 +31,8 @@
   "requirements": [
     [
       "has_the_recipe",
-      "iron_ingot"
+      "iron_ingot",
+      "env_collector"
     ]
   ],
   "rewards": {

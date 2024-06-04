@@ -30,5 +30,10 @@ public class ETDatagen {
                 event.includeClient(),
                 new ETBlockStateProvider(output, existingFileHelper)
         );
+
+        generator.addProvider(
+                event.includeClient(),
+                new ETItemModelProvider(output, existingFileHelper)
+        );
     }
 }
