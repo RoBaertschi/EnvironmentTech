@@ -3,6 +3,7 @@ plugins {
     eclipse
     idea
     `maven-publish`
+    id("io.freefair.lombok") version "8.6"
     id ("net.neoforged.gradle.userdev") version ("7.0.138")
 }
 

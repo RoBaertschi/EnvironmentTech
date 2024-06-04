@@ -4,11 +4,11 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 import robaertschi.environmenttech.data.attachments.ETAttachments;
 
 import javax.annotation.ParametersAreNonnullByDefault;
@@ -21,7 +21,7 @@ public class EnvDetectorItem extends Item {
 
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+    public @NotNull InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         if (pLevel.isClientSide()) return InteractionResultHolder.pass(pPlayer.getItemInHand(pUsedHand));
 
         var chunk = pLevel.getChunk(pPlayer.blockPosition());
@@ -33,9 +33,7 @@ public class EnvDetectorItem extends Item {
         }
 
         if (!pPlayer.isCreative()) {
-            pPlayer.getItemInHand(pUsedHand).hurtAndBreak(1, pLevel.getRandom(), pPlayer, () -> {
-                pPlayer.getItemInHand(pUsedHand).setCount(0);
-            });
+            pPlayer.getItemInHand(pUsedHand).hurtAndBreak(1, pLevel.getRandom(), pPlayer, () -> pPlayer.getItemInHand(pUsedHand).setCount(0));
         }
 
         return InteractionResultHolder.consume(pPlayer.getItemInHand(pUsedHand));

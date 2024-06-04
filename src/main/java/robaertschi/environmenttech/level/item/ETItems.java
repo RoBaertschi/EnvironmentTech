@@ -34,7 +34,7 @@ public class ETItems {
                     .durability(10)
     );
 
-    public static final DeferredItem<Item> ENVIRONMENTAL_ESSENCE = ITEMS.registerSimpleItem("environmental_essence");
+    public static final DeferredItem<Item> ENVIRONMENTAL_ESSENCE_ITEM = ITEMS.registerSimpleItem("environmental_essence");
 
 
     @SuppressWarnings("unused")
@@ -45,7 +45,7 @@ public class ETItems {
             .displayItems((parameters, output) -> {
                 output.accept(ENV_DETECTOR_ITEM.get());
                 output.accept(EXAMPLE_BLOCK_ITEM.get());
-                output.accept(ENVIRONMENTAL_ESSENCE.get());
+                output.accept(ENVIRONMENTAL_ESSENCE_ITEM.get());
             }).build());
 
 
