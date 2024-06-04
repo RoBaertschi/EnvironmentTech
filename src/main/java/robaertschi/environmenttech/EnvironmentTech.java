@@ -19,6 +19,7 @@ import robaertschi.environmenttech.data.attachments.ETAttachments;
 import robaertschi.environmenttech.data.capabilities.ETCapabilities;
 import robaertschi.environmenttech.data.recipes.ETRecipes;
 import robaertschi.environmenttech.level.block.ETBlocks;
+import robaertschi.environmenttech.level.block.entity.ETBlockEntities;
 import robaertschi.environmenttech.level.item.ETItems;
 
 @Mod(EnvironmentTech.MODID)
@@ -39,11 +40,12 @@ public class EnvironmentTech
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
-        ETAttachments.init(modEventBus);
-        ETCapabilities.init(modEventBus);
         ETBlocks.init(modEventBus);
+        ETBlockEntities.init(modEventBus);
         ETItems.init(modEventBus);
         ETRecipes.init(modEventBus);
+        ETAttachments.init(modEventBus);
+        ETCapabilities.init(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
 

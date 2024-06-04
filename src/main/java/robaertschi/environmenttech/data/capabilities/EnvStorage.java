@@ -34,8 +34,10 @@ public class EnvStorage implements IEnvStorage {
     @Override
     public long receiveEnv(long amount, boolean simulate) {
         long received = Mth.clamp(this.maxEnv - this.env, 0, Math.min(amount, maxTransfer));
-        if (!simulate)
+        if (!simulate) {
+            onContentsChanged();
             env += received;
+        }
 
         return received;
     }
@@ -43,6 +45,10 @@ public class EnvStorage implements IEnvStorage {
     @Override
     public long getEnvStored() {
         return env;
+    }
+
+    public void setEnvStored(long env) {
+        this.env = env;
     }
 
     @Override
@@ -54,4 +60,6 @@ public class EnvStorage implements IEnvStorage {
     public EnvType[] canAcceptEnvType() {
         return acceptedEnvTypes;
     }
+
+    public void onContentsChanged() {}
 }

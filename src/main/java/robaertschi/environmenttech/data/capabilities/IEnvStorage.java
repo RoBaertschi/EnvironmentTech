@@ -17,6 +17,7 @@ public interface IEnvStorage {
     long getEnvStored();
     long getMaxEnv();
 
+
     /**
      * @return Which ENVType's that are supported.
      */
