@@ -2,5 +2,6 @@
   "item.environmenttech.env_detector": "ENV Detector",
   "item.environmenttech.environmental_essence": "Environmental Essence",
 
-  "itemGroup.environmenttech": "Environment Tech"
+  "itemGroup.environmenttech": "Environment Tech",
+  "screen.environmenttech.env_collector": "ENV Collector"
 }

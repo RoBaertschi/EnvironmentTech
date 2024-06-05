@@ -13,7 +13,7 @@ public class ETMenus {
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(BuiltInRegistries.MENU, MODID);
 
     public static final DeferredHolder<MenuType<?>, MenuType<EnvCollectorMenu>> ENV_COLLECTOR_MENU = MENUS.register("env_collector", () ->
-            IMenuTypeExtension.create((windowId, inv, data) -> new EnvCollectorMenu(windowId, inv.player, data.readBlockPos())));
+            IMenuTypeExtension.create((windowId, inv, data) -> new EnvCollectorMenu(windowId, inv.player, data)));
 
     public static void init(IEventBus modEventBus) {
         MENUS.register(modEventBus);

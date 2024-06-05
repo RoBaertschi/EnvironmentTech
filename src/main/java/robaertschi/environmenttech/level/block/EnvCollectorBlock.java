@@ -3,6 +3,7 @@ package robaertschi.environmenttech.level.block;
 import com.mojang.serialization.MapCodec;
 import lombok.extern.slf4j.Slf4j;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
@@ -66,18 +67,7 @@ public class EnvCollectorBlock extends BaseEntityBlock {
         if (!pLevel.isClientSide) {
             BlockEntity be = pLevel.getBlockEntity(pPos);
             if (be instanceof EnvCollectorBlockEntity) {
-                MenuProvider containerProvider = new MenuProvider() {
-                    @Override
-                    public @NotNull Component getDisplayName() {
-                        return Component.translatable("environmenttech.screen.env_collector");
-                    }
-
-                    @Override
-                    public @NotNull AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-                        return new EnvCollectorMenu(pContainerId, pPlayer, pPos);
-                    }
-                };
-                pPlayer.openMenu(containerProvider, buf -> buf.writeBlockPos(pPos));
+                pPlayer.openMenu((MenuProvider) be, pPos);
             } else {
                 throw new IllegalStateException("Our named container provider is missing!");
             }

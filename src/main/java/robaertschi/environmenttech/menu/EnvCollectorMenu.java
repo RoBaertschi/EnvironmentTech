@@ -1,13 +1,11 @@
 package robaertschi.environmenttech.menu;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
@@ -20,16 +18,30 @@ import static robaertschi.environmenttech.level.block.entity.EnvCollectorBlockEn
 
 public class EnvCollectorMenu extends AbstractContainerMenu {
 
-    private final BlockPos pos;
+    private final EnvCollectorBlockEntity blockEntity;
+    private final ContainerData data;
 
-    public EnvCollectorMenu(int pContainerId, Player player, BlockPos pos) {
+    public EnvCollectorMenu(int pContainerId, Player player, FriendlyByteBuf buf) {
+        this(pContainerId, player, (EnvCollectorBlockEntity) player.level().getBlockEntity(buf.readBlockPos()), new SimpleContainerData(2));
+    }
+
+    public EnvCollectorMenu(int pContainerId, Player player, EnvCollectorBlockEntity blockEntity, ContainerData data) {
         super(ETMenus.ENV_COLLECTOR_MENU.get(), pContainerId);
-        this.pos = pos;
-        if (player.level().getBlockEntity(pos) instanceof EnvCollectorBlockEntity envCollector) {
-            addSlot(new SlotItemHandler(envCollector.getInventory(), 0, 55, 35));
-            addSlot(new SlotItemHandler(envCollector.getInventory(), 1, 114, 33));
-        }
-        layoutPlayerInventorySlots(player.getInventory(), 10, 70);
+        this.blockEntity = blockEntity;
+        this.data = data;
+        addSlot(new SlotItemHandler(blockEntity.getInventory(), 0, 54, 34));
+        addSlot(new SlotItemHandler(blockEntity.getInventory(), 1, 116, 35));
+        layoutPlayerInventorySlots(player.getInventory(), 8, 84);
+
+        addDataSlots(data);
+    }
+
+    public int getProgress() {
+        return data.get(0);
+    }
+
+    public int getMaxProgress() {
+        return data.get(1);
     }
 
     private int addSlotRange(Container playerInventory, int index, int x, int y, int amount, int dx) {
@@ -99,6 +111,6 @@ public class EnvCollectorMenu extends AbstractContainerMenu {
 
     @Override
     public boolean stillValid(@NotNull Player pPlayer) {
-        return stillValid(ContainerLevelAccess.create(pPlayer.level(), pos), pPlayer, ETBlocks.ENV_COLLECTOR_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(pPlayer.level(), blockEntity.getBlockPos()), pPlayer, ETBlocks.ENV_COLLECTOR_BLOCK.get());
     }
 }
