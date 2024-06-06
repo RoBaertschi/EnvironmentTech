@@ -26,6 +26,8 @@ import robaertschi.environmenttech.menu.ETMenus;
 @Mod(EnvironmentTech.MODID)
 public class EnvironmentTech
 {
+
+
     public static final String MODID = "environmenttech";
     public static final Logger LOGGER = LogUtils.getLogger();
 
