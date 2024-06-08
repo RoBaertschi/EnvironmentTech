@@ -5,7 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import robaertschi.environmenttech.EnvironmentTech;
 
-public class ProgressArrowComponent {
+public class ProgressArrowUtils {
     public static final ResourceLocation SPRITE = EnvironmentTech.id("textures/gui/sprites/component/progress_arrow.png");
 
     public static void draw(GuiGraphics guiGraphics, int x, int y, int progress) {

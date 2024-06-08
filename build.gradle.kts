@@ -63,6 +63,7 @@ val junitRuntimeOnly: Configuration by configurations.getting {
 }
 
 
+
 configurations["junitImplementation"].extendsFrom(configurations.implementation.get())
 
 
@@ -70,6 +71,7 @@ configurations["junitImplementation"].extendsFrom(configurations.implementation.
 
 //minecraft.accessTransformers.file rootProject.file("src/main/resources/META-INF/accesstransformer.cfg")
 //minecraft.accessTransformers.entry public net.minecraft.client.Minecraft textureManager # textureManager
+
 
 // Default run configurations.
 // These can be tweaked, removed, or duplicated as needed.
@@ -113,7 +115,9 @@ runs {
     // The gametest system is also enabled by default for other run configs under the /test command.
     create("gameTestServer") {
         systemProperty ("forge.enabledGameTestNamespaces", modId)
+
     }
+
 
     create("data") {
         // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
@@ -146,7 +150,6 @@ dependencies {
     junitImplementation(platform("org.junit:junit-bom:5.10.2"))
     junitImplementation("org.junit.jupiter:junit-jupiter-params")
     junitRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
-
 
     junitImplementation("org.assertj:assertj-core:3.25.1")
 

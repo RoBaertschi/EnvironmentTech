@@ -1,22 +1,28 @@
 package robaertschi.environmenttech.client.screen;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import org.jetbrains.annotations.NotNull;
 import robaertschi.environmenttech.EnvironmentTech;
+import robaertschi.environmenttech.client.renderer.EnvStorageRenderer;
 import robaertschi.environmenttech.menu.EnvCollectorMenu;
 
 public class EnvCollectorScreen extends AbstractContainerScreen<EnvCollectorMenu> {
     private final ResourceLocation GUI = EnvironmentTech.id("textures/gui/container/env_collector.png");
+    private EnvStorageRenderer storageRenderer;
 
     public EnvCollectorScreen(EnvCollectorMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
         this.inventoryLabelY = this.imageHeight - 94;
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        storageRenderer = new EnvStorageRenderer(leftPos + 8, topPos + 11, menu.getBlockEntity().getEnvStorage());
     }
 
     @Override
@@ -25,18 +31,27 @@ public class EnvCollectorScreen extends AbstractContainerScreen<EnvCollectorMenu
         int relY = (this.height - this.imageHeight) / 2;
         pGuiGraphics.blit(GUI, relX, relY, 0, 0, this.imageWidth, this.imageHeight);
 
-        pGuiGraphics.blit(ProgressArrowComponent.SPRITE,
+        pGuiGraphics.blit(ProgressArrowUtils.SPRITE,
                 relX + 78, relY + 35,
                 0, 0,
-                ProgressArrowComponent.getScaledProgress(menu.getProgress(), menu.getMaxProgress()),16,
+                ProgressArrowUtils.getScaledProgress(menu.getProgress(), menu.getMaxProgress()),16,
                 24,
                 16
         );
+
+        storageRenderer.render(pGuiGraphics);
+    }
+
+    @Override
+    protected void renderLabels(@NotNull GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
+        storageRenderer.renderTooltip(pGuiGraphics, pMouseX, pMouseY, leftPos, topPos, font);
     }
 
     @Override
     public void render(@NotNull GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+        renderBackground(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
         this.renderTooltip(pGuiGraphics, pMouseX, pMouseY);
     }
+
 }

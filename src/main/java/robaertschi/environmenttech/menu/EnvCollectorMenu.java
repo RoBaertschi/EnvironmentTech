@@ -1,6 +1,6 @@
 package robaertschi.environmenttech.menu;
 
-import net.minecraft.core.BlockPos;
+import lombok.Getter;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
@@ -9,7 +9,6 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import robaertschi.environmenttech.level.block.ETBlocks;
 import robaertschi.environmenttech.level.block.entity.EnvCollectorBlockEntity;
 
@@ -18,6 +17,7 @@ import static robaertschi.environmenttech.level.block.entity.EnvCollectorBlockEn
 
 public class EnvCollectorMenu extends AbstractContainerMenu {
 
+    @Getter
     private final EnvCollectorBlockEntity blockEntity;
     private final ContainerData data;
 

@@ -3,7 +3,6 @@ package robaertschi.environmenttech.level.block.entity;
 import lombok.Getter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
@@ -42,6 +41,10 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
     public static final int SLOT_OUTPUT_COUNT = 1;
 
     public static final int SLOT_COUNT = SLOT_INPUT_COUNT + SLOT_OUTPUT_COUNT;
+    public static final String INVENTORY_KEY = "Inventory";
+    public static final String ENV_KEY = "ENV";
+    public static final String PROGRESS_KEY = "Progress";
+    public static final String MAX_PROGRESS_KEY = "MaxProgress";
 
     @Getter
     private final ItemStackHandler inventory = new ItemStackHandler(2) {
@@ -76,12 +79,12 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
     };
 
     @Getter
-    private ContainerData data;
+    private final ContainerData data;
 
     @Getter
     private int progress = 0;
     @Getter
-    private int maxProgress = 10;
+    private int maxProgress = 100;
     // Every 20 ticks, we take ENV from the current Chunk
     private int takeEnv = 0;
     @Nullable
@@ -115,22 +118,29 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
         };
     }
 
+
+
     @Override
     protected void loadAdditional(@NotNull CompoundTag pTag, HolderLookup.@NotNull Provider provider) {
         super.loadAdditional(pTag, provider);
         CompoundTag modData = pTag.getCompound(MODID);
-        this.inventory.deserializeNBT(provider, modData.getCompound("Inventory"));
-        this.envStorage.setEnvStored(modData.getLong("ENV"));
+        this.inventory.deserializeNBT(provider, modData.getCompound(INVENTORY_KEY));
+        this.envStorage.setEnvStored(modData.getLong(ENV_KEY));
+        this.progress = modData.getInt(PROGRESS_KEY);
+//        this.maxProgress = modData.getInt(MAX_PROGRESS_KEY);
     }
 
     @Override
     protected void saveAdditional(@NotNull CompoundTag pTag, HolderLookup.@NotNull Provider provider) {
         super.saveAdditional(pTag, provider);
         CompoundTag modData = new CompoundTag();
-        modData.put("Inventory", inventory.serializeNBT(provider));
-        modData.putLong("ENV", envStorage.getEnvStored());
+        modData.put(INVENTORY_KEY, inventory.serializeNBT(provider));
+        modData.putLong(ENV_KEY, envStorage.getEnvStored());
+        modData.putInt(PROGRESS_KEY, progress);
+//        modData.putInt(MAX_PROGRESS_KEY, maxProgress);
         pTag.put(MODID, modData);
     }
+
 
     public ItemStack getInputItem() {
         return this.inventory.getStackInSlot(0);
@@ -166,20 +176,22 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
         if (hasRecipe(level)) {
             if (progress > 0 && progress < getMaxProgress()) {
                 progress++;
+//                setChanged();
+//                level.sendBlockUpdated(getBlockPos(), blockState, blockState, Block.UPDATE_CLIENTS);
             } else if (progress > 0) {
                 produce(level);
                 progress = 0;
             } else if (getOutputItem().getCount() < getOutputItem().getMaxStackSize()){
                 assert currentRecipe != null;
-//                if (envStorage.getEnvStored() >= currentRecipe.envUsed()) {
-//                    envStorage.setEnvStored(envStorage.getEnvStored() - currentRecipe.envUsed());
-//                    progress = 1;
-//                }
-
-                progress = 1;
+                if (envStorage.getEnvStored() >= currentRecipe.envUsed()) {
+                    envStorage.setEnvStored(envStorage.getEnvStored() - currentRecipe.envUsed());
+                    progress = 1;
+                }
             }
 
         }
+
+
     }
 
     private void produce(ServerLevel level) {
