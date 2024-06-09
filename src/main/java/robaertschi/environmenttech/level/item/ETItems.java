@@ -1,11 +1,13 @@
 package robaertschi.environmenttech.level.item;
 
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.CustomModelData;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -32,6 +34,7 @@ public class ETItems {
     public static final DeferredItem<EnvDetectorItem> ENV_DETECTOR_ITEM = ITEMS.registerItem("env_detector",
             EnvDetectorItem::new,
             new Item.Properties()
+                    .component(DataComponents.CUSTOM_MODEL_DATA, new CustomModelData(0))
                     .stacksTo(1)
                     .durability(10)
     );

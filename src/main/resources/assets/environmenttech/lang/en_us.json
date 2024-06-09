@@ -6,5 +6,6 @@
   "screen.environmenttech.env_collector": "ENV Collector",
   "screen.environmenttech.debug": "Debug Menu",
   "key.environmenttech.open_debug_menu": "Open Debug Menu",
-  "key.categories.environmenttech": "Environment Tech"
+  "key.categories.environmenttech": "Environment Tech",
+  "item.environmenttech.env_detector.tooltip": "The ENV Detector is a handy device that shows you how much ENV is avilable in the current chunk. It can display from 0 to 16 ENV."
 }

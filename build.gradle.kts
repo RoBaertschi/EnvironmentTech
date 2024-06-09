@@ -1,10 +1,12 @@
+import java.net.URI
+
 plugins {
     `java-library`
     eclipse
     idea
     `maven-publish`
     id("io.freefair.lombok") version "8.6"
-    id ("net.neoforged.gradle.userdev") version ("7.0.139")
+    id ("net.neoforged.gradle.userdev") version ("7.0.142")
 }
 
 val minecraftVersion: String by project
@@ -21,11 +23,25 @@ val modGroupId: String by project
 val modAuthors: String by project
 val modDescription: String by project
 
+val junitVersion: String by project
+val assertjVersion: String by project
+val topVersion: String by project
+val reiVersion: String by project
+
 version = modVersion
 group = modGroupId
 
 repositories {
     mavenLocal()
+    maven {
+        url = URI.create("https://maven.k-4u.nl")
+    }
+    maven {
+        url = URI.create("https://maven.blamejared.com")
+    }
+
+    maven { url = URI.create("https://maven.shedaniel.me/") }
+    maven { url = URI.create("https://maven.architectury.dev/") }
 }
 
 base {
@@ -33,6 +49,7 @@ base {
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
 
 
 sourceSets {
@@ -129,12 +146,6 @@ runs {
 
 }
 
-
-afterEvaluate {
-    runs["junit"].modSources = runs["junit"].modSources.get().stream().filter { it != sourceSets.main.get() }.toList()
-}
-
-
 dependencies {
     // Specify the version of Minecraft to use.
     // Depending on the plugin applied there are several options. We will assume you applied the userdev plugin as shown above.
@@ -144,26 +155,26 @@ dependencies {
     // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
     implementation ("net.neoforged:neoforge:${neoVersion}")
 
+    // Wait until 1.20.6 has a stable neoforge version, so that all mods should work when updated
+//    implementation("mcjty.theoneprobe:theoneprobe:${topVersion}")
+//
+//    runtimeOnly("me.shedaniel:RoughlyEnoughItems-neoforge:${reiVersion}")
+//    compileOnly("me.shedaniel:RoughlyEnoughItems-api-neoforge:${reiVersion}")
+//    compileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-neoforge:${reiVersion}")
 
 
     // Testing
-    junitImplementation(platform("org.junit:junit-bom:5.10.2"))
+    junitImplementation(platform("org.junit:junit-bom:${junitVersion}"))
     junitImplementation("org.junit.jupiter:junit-jupiter-params")
     junitRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 
-    junitImplementation("org.assertj:assertj-core:3.25.1")
-
-//    "junitImplementation"(platform("org.junit:junit-bom:5.10.2"))
-//    "junitImplementation"("org.junit.jupiter:junit-jupiter-params")
-//    "junitRuntimeOnly"("org.junit.jupiter:junit-jupiter-engine")
-
-
+    junitImplementation("org.assertj:assertj-core:${assertjVersion}")
 
     // Example mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
-    // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
-    // compileOnly "mezz.jei:jei-${mc_version}-forge-api:${jei_version}"
-    // runtimeOnly "mezz.jei:jei-${mc_version}-forge:${jei_version}"
+//     compileOnly("mezz.jei:jei-${minecraftVersion}-common-api:${jei_version}")
+//     compileOnly("mezz.jei:jei-${minecraftVersion}-forge-api:${jei_version}")
+//     runtimeOnly("mezz.jei:jei-${minecraftVersion}-forge:${jei_version}")
 
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
@@ -180,6 +191,15 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 }
+
+
+afterEvaluate {
+//    runs["junit"].modSources(runs["junit"].modSources)
+//    runs["junit"].modSources = runs["junit"].modSources.get().stream().filter { it != sourceSets.main.get() }.toList()
+    runs["junit"].modSources.all().get().values().remove(sourceSets.main.get())
+}
+
+
 
 // This block of code expands all declared replace properties in the specified resource targets.
 // A missing property will result in an error. Properties are expanded using ${} Groovy notation.

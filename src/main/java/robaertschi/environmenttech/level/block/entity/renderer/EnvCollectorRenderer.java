@@ -11,11 +11,13 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LightLayer;
+import net.minecraft.world.phys.Vec3;
 import robaertschi.environmenttech.level.block.EnvCollectorBlock;
 import robaertschi.environmenttech.level.block.entity.EnvCollectorBlockEntity;
 import robaertschi.environmenttech.level.particle.ETParticles;
@@ -40,7 +42,11 @@ public class EnvCollectorRenderer implements BlockEntityRenderer<EnvCollectorBlo
 
         ItemStack outputItem = pBlockEntity.getOutputItem();
         pPoseStack.pushPose();
-        pPoseStack.translate(0.5, 0.125, 0.8);
+        Vec3i vec = pBlockEntity.getBlockState().getValue(EnvCollectorBlock.FACING).getNormal();
+        Vec3 vecDouble = new Vec3(vec.getX(), vec.getY(), vec.getZ());
+        vecDouble = vecDouble.multiply(new Vec3(0.3, 0.3, 0.3));
+        vecDouble = vecDouble.add(0.5, 0.125, 0.5);
+        pPoseStack.translate(vecDouble.x, vecDouble.y, vecDouble.z);
         pPoseStack.scale(0.3f, 0.3f, 0.3f);
         finishItemRender(pBlockEntity, pPoseStack, pBuffer, outputItem, itemRenderer);
 
