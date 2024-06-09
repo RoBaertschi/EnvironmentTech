@@ -1,5 +1,6 @@
 package robaertschi.environmenttech.data.capabilities;
 
+import net.minecraft.core.Direction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.capabilities.BlockCapability;
 import net.neoforged.neoforge.capabilities.Capabilities;
@@ -22,7 +23,15 @@ public class ETCapabilities {
         event.registerBlockEntity(
                 Capabilities.ItemHandler.BLOCK,
                 ETBlockEntities.ENV_COLLECTOR_BLOCK_ENTITY.get(),
-                (object, context) -> object.getInventory()
+                (object, context) -> {
+                    if (context == null) {
+                        return object.getInventory().get();
+                    }
+                    if (context == Direction.DOWN) {
+                        return object.getOutputItemHandler().get();
+                    }
+                    return object.getInputItemHandler().get();
+                }
         );
 
         event.registerBlockEntity(

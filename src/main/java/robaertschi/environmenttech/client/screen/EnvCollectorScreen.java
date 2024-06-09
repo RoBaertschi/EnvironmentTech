@@ -22,7 +22,7 @@ public class EnvCollectorScreen extends AbstractContainerScreen<EnvCollectorMenu
     @Override
     protected void init() {
         super.init();
-        storageRenderer = new EnvStorageRenderer(leftPos + 8, topPos + 11, menu.getBlockEntity().getEnvStorage());
+        storageRenderer = new EnvStorageRenderer(leftPos + imageWidth - 18, topPos + 11, menu.getBlockEntity().getEnvStorage());
     }
 
     @Override
@@ -45,6 +45,7 @@ public class EnvCollectorScreen extends AbstractContainerScreen<EnvCollectorMenu
     @Override
     protected void renderLabels(@NotNull GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
         storageRenderer.renderTooltip(pGuiGraphics, pMouseX, pMouseY, leftPos, topPos, font);
+        super.renderLabels(pGuiGraphics, pMouseX, pMouseY);
     }
 
     @Override

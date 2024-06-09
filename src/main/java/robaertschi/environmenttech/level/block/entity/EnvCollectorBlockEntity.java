@@ -20,11 +20,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
+import net.neoforged.jarjar.nio.util.Lazy;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import robaertschi.environmenttech.data.attachments.ETAttachments;
+import robaertschi.environmenttech.data.capabilities.AdaptedItemHandler;
 import robaertschi.environmenttech.data.capabilities.EnvStorage;
 import robaertschi.environmenttech.data.capabilities.EnvType;
 import robaertschi.environmenttech.data.recipes.ETRecipes;
@@ -42,13 +47,13 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
     public static final int SLOT_OUTPUT_COUNT = 1;
 
     public static final int SLOT_COUNT = SLOT_INPUT_COUNT + SLOT_OUTPUT_COUNT;
-    public static final String INVENTORY_KEY = "Inventory";
+    public static final String INPUT_INVENTORY_KEY = "InputInventory";
+    public static final String OUTPUT_INVENTORY_KEY = "OutputInventory";
     public static final String ENV_KEY = "ENV";
     public static final String PROGRESS_KEY = "Progress";
 
     @Getter
-    private final ItemStackHandler inventory = new ItemStackHandler(2) {
-        @Override
+    private final ItemStackHandler inputInventory = new ItemStackHandler(SLOT_INPUT_COUNT) {
         protected void onContentsChanged(int slot) {
             EnvCollectorBlockEntity.this.setChanged();
             assert level != null;
@@ -56,15 +61,42 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
         }
+    };
+    @Getter
+    private final ItemStackHandler outputInventory = new ItemStackHandler(SLOT_INPUT_COUNT) {
+        protected void onContentsChanged(int slot) {
+            EnvCollectorBlockEntity.this.setChanged();
+            assert level != null;
+            if (!level.isClientSide()) {
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
+        }
+    };
+    @Getter
+    private final Lazy<IItemHandlerModifiable> inventory = Lazy.of(() -> new CombinedInvWrapper(inputInventory, outputInventory) {
 
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             return slot < SLOT_INPUT_COUNT;
         }
-    };
-
+    });
     @Getter
-    private final RecipeWrapper recipeWrapper = new RecipeWrapper(inventory);
+    private final Lazy<IItemHandler> inputItemHandler = Lazy.of(() -> new AdaptedItemHandler(inputInventory) {
+        @Override
+        public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
+            return ItemStack.EMPTY;
+        }
+    });
+    @Getter
+    private final Lazy<IItemHandler> outputItemHandler = Lazy.of(() -> new AdaptedItemHandler(outputInventory) {
+        @Override
+        public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
+            return stack;
+        }
+    });
+    @Getter
+    private final Lazy<RecipeWrapper> recipeWrapper = Lazy.of(() -> new RecipeWrapper(inventory.get()));
+
 
     @Getter
     private final EnvStorage envStorage = new EnvStorage(EnvType.Chunk, 64, 0, 1) {
@@ -124,7 +156,8 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
     protected void loadAdditional(@NotNull CompoundTag pTag, HolderLookup.@NotNull Provider provider) {
         super.loadAdditional(pTag, provider);
         CompoundTag modData = pTag.getCompound(MODID);
-        this.inventory.deserializeNBT(provider, modData.getCompound(INVENTORY_KEY));
+        inputInventory.deserializeNBT(provider, modData.getCompound(INPUT_INVENTORY_KEY));
+        outputInventory.deserializeNBT(provider, modData.getCompound(OUTPUT_INVENTORY_KEY));
         this.envStorage.setEnvStored(modData.getLong(ENV_KEY));
         this.progress = modData.getInt(PROGRESS_KEY);
 //        this.maxProgress = modData.getInt(MAX_PROGRESS_KEY);
@@ -134,7 +167,8 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
     protected void saveAdditional(@NotNull CompoundTag pTag, HolderLookup.@NotNull Provider provider) {
         super.saveAdditional(pTag, provider);
         CompoundTag modData = new CompoundTag();
-        modData.put(INVENTORY_KEY, inventory.serializeNBT(provider));
+        modData.put(INPUT_INVENTORY_KEY, inputInventory.serializeNBT(provider));
+        modData.put(OUTPUT_INVENTORY_KEY, outputInventory.serializeNBT(provider));
         modData.putLong(ENV_KEY, envStorage.getEnvStored());
         modData.putInt(PROGRESS_KEY, progress);
 //        modData.putInt(MAX_PROGRESS_KEY, maxProgress);
@@ -143,21 +177,21 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
 
 
     public ItemStack getInputItem() {
-        return this.inventory.getStackInSlot(0);
+        return this.inputInventory.getStackInSlot(0);
     }
 
     public ItemStack getOutputItem() {
-        return this.inventory.getStackInSlot(1);
+        return this.outputInventory.getStackInSlot(0);
     }
 
     @SuppressWarnings("unused")
     public void setInputItem(ItemStack itemStack) {
-        this.inventory.setStackInSlot(0, itemStack);
+        this.inputInventory.setStackInSlot(0, itemStack);
     }
 
 
     public void setOutputItem(ItemStack itemStack) {
-        this.inventory.setStackInSlot(1, itemStack);
+        this.outputInventory.setStackInSlot(0, itemStack);
     }
 
 
@@ -199,7 +233,7 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
         assert currentRecipe != null;
 
         if (getOutputItem().isEmpty()) {
-            setOutputItem(currentRecipe.assemble(recipeWrapper, level.registryAccess()));
+            setOutputItem(currentRecipe.assemble(recipeWrapper.get(), level.registryAccess()));
         } else {
             getOutputItem().setCount(getOutputItem().getCount() + 1);
         }
@@ -208,9 +242,9 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
 
     private boolean hasRecipe(Level level) {
         if (currentRecipe != null) {
-            return currentRecipe.matches(recipeWrapper, level);
+            return currentRecipe.matches(recipeWrapper.get(), level);
         }
-        var recipe = level.getRecipeManager().getRecipeFor(ETRecipes.ENV_COLLECTOR_RECIPE_TYPE.get(), recipeWrapper, level);
+        var recipe = level.getRecipeManager().getRecipeFor(ETRecipes.ENV_COLLECTOR_RECIPE_TYPE.get(), recipeWrapper.get(), level);
         if (recipe.isEmpty()) {
             progress = 0;
             return false;
