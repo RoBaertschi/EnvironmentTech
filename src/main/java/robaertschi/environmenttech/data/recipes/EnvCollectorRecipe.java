@@ -18,7 +18,6 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,10 +28,6 @@ public record EnvCollectorRecipe(Ingredient input, ItemStack output, int envUsed
     @Override
     public boolean matches(@NotNull Container pContainer, @NotNull Level pLevel) {
         return this.input.test(pContainer.getItem(0));
-    }
-
-    public boolean matches(@NotNull IItemHandler iItemHandler, @NotNull Level level) {
-        return this.input.test(iItemHandler.getStackInSlot(0));
     }
 
     @Override
@@ -68,7 +63,7 @@ public record EnvCollectorRecipe(Ingredient input, ItemStack output, int envUsed
 
         private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
         // Currently we just ignore the warning, maybe we will use it later, maybe never.
-        @SuppressWarnings("FieldCanBeLocal")
+        @SuppressWarnings({"FieldCanBeLocal", "unused"})
         @Nullable
         private String group;
 

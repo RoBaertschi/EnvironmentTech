@@ -1,29 +1,21 @@
 package robaertschi.environmenttech;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import net.neoforged.neoforge.gametest.GameTestHooks;
 import org.slf4j.Logger;
-import robaertschi.environmenttech.client.ETClient;
 import robaertschi.environmenttech.command.EnvironmenttechCommand;
 import robaertschi.environmenttech.data.attachments.ETAttachments;
 import robaertschi.environmenttech.data.capabilities.ETCapabilities;
+import robaertschi.environmenttech.data.components.ETComponents;
 import robaertschi.environmenttech.data.recipes.ETRecipes;
 import robaertschi.environmenttech.level.block.ETBlocks;
 import robaertschi.environmenttech.level.block.entity.ETBlockEntities;
@@ -31,6 +23,7 @@ import robaertschi.environmenttech.level.item.ETItems;
 import robaertschi.environmenttech.level.particle.ETParticles;
 import robaertschi.environmenttech.menu.ETMenus;
 
+@SuppressWarnings("unused")
 @Mod(EnvironmentTech.MODID)
 public class EnvironmentTech
 {
@@ -55,8 +48,6 @@ public class EnvironmentTech
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public EnvironmentTech(IEventBus modEventBus, ModContainer modContainer)
     {
-        modEventBus.addListener(this::commonSetup);
-        NeoForge.EVENT_BUS.addListener(ETClient::onClientTickEnd);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
@@ -68,13 +59,10 @@ public class EnvironmentTech
         ETCapabilities.init(modEventBus);
         ETMenus.init(modEventBus);
         ETParticles.init(modEventBus);
+        ETComponents.DATA_COMPONENTS.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
 
-    }
-
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
     }
 
     @SubscribeEvent
@@ -82,11 +70,6 @@ public class EnvironmentTech
         new EnvironmenttechCommand(event.getDispatcher());
     }
 
-
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event)
-    {
-    }
 
     @SubscribeEvent()
     public void onPlayerTick(PlayerTickEvent.Post event) {

@@ -9,9 +9,6 @@ import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.CustomModelData;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -19,7 +16,6 @@ import robaertschi.environmenttech.level.block.ETBlocks;
 
 import static robaertschi.environmenttech.EnvironmentTech.MODID;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 public class ETItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
 
@@ -40,6 +36,7 @@ public class ETItems {
     );
 
     public static final DeferredItem<Item> ENVIRONMENTAL_ESSENCE_ITEM = ITEMS.registerSimpleItem("environmental_essence");
+    public static final DeferredItem<Item> GLASS_TANK = ITEMS.registerSimpleItem("glass_tank");
 
 
     @SuppressWarnings("unused")
@@ -52,6 +49,7 @@ public class ETItems {
                 output.accept(ENV_DETECTOR_ITEM.get());
 //                output.accept(EXAMPLE_BLOCK_ITEM.get());
                 output.accept(ENVIRONMENTAL_ESSENCE_ITEM.get());
+                output.accept(GLASS_TANK);
             }).build());
 
 
@@ -62,10 +60,4 @@ public class ETItems {
     }
 
 
-    @SuppressWarnings("unused")
-    @SubscribeEvent()
-    // Add the example block item to the building blocks tab
-    public static void addCreative(BuildCreativeModeTabContentsEvent event)
-    {
-    }
 }

@@ -3,16 +3,12 @@ package robaertschi.environmenttech.level.block;
 import com.mojang.serialization.MapCodec;
 import lombok.extern.slf4j.Slf4j;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.MenuProvider;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -35,11 +31,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import robaertschi.environmenttech.level.block.entity.ETBlockEntities;
 import robaertschi.environmenttech.level.block.entity.EnvCollectorBlockEntity;
-import robaertschi.environmenttech.menu.EnvCollectorMenu;
 
 import javax.annotation.ParametersAreNonnullByDefault;
-
-import static robaertschi.environmenttech.EnvironmentTech.MODID;
 
 @ParametersAreNonnullByDefault()
 @Slf4j
@@ -69,7 +62,7 @@ public class EnvCollectorBlock extends BaseEntityBlock {
         return shape;
     }
 
-    public static VoxelShape SHAPE = makeShape();
+    public static final VoxelShape SHAPE = makeShape();
 
     @Override
     protected @NotNull MapCodec<? extends BaseEntityBlock> codec() {
@@ -92,6 +85,7 @@ public class EnvCollectorBlock extends BaseEntityBlock {
         return state.setValue(FACING, direction.rotate(state.getValue(FACING)));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     protected @NotNull BlockState mirror(BlockState pState, Mirror pMirror) {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
@@ -125,6 +119,7 @@ public class EnvCollectorBlock extends BaseEntityBlock {
         return openMenu(pLevel, pPos, pPlayer);
     }
 
+    @SuppressWarnings("SameReturnValue")
     private InteractionResult openMenu(Level pLevel, BlockPos pPos, Player pPlayer) {
         if (!pLevel.isClientSide) {
             BlockEntity be = pLevel.getBlockEntity(pPos);
@@ -139,7 +134,7 @@ public class EnvCollectorBlock extends BaseEntityBlock {
 
     @Override
     protected @NotNull ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
-        InteractionResult result = openMenu(pLevel, pPos, pPlayer);
+        openMenu(pLevel, pPos, pPlayer);
         return ItemInteractionResult.SUCCESS;
     }
 

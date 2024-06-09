@@ -2,11 +2,12 @@ package robaertschi.environmenttech.data.capabilities;
 
 import net.minecraft.util.Mth;
 
+@SuppressWarnings("unused")
 public class EnvStorage implements IEnvStorage {
     private final EnvType[] acceptedEnvTypes;
     private final long maxEnv;
     private long env;
-    private long maxTransfer;
+    private final long maxTransfer;
 
     public EnvStorage(EnvType acceptedEnvType, long maxEnv, long env, long maxTransfer) {
         this.acceptedEnvTypes = new EnvType[1];

@@ -1,3 +1,9 @@
-// 1.20.6	2024-06-08T10:31:27.329089788	Recipes
+// 1.20.6	2024-06-09T15:31:42.389888152	Recipes
 375ee3cb8eaf222bd0d5576061d1741b5b3d5cff data/environmenttech/advancements/recipes/environmental_essence.json
+99b83974e5a7a570c2111cab62a292d126c36524 data/environmenttech/advancements/recipes/misc/env_collector_block_item.json
+6962e07757d0b7087542bf51dddde36d4beb3ee4 data/environmenttech/advancements/recipes/misc/glass_tank.json
+76b6b2850a79c80b2f2969b93b26bc3832a77ab4 data/environmenttech/advancements/recipes/tools/env_detector_item.json
+23bb508829cafa270f61c06c8cc5aa3ad58e54e1 data/environmenttech/recipes/env_collector_block_item.json
+17b9bb86d970f10b3784048b790ba541ed3bf8fd data/environmenttech/recipes/env_detector_item.json
 d462a41d1b0fda35660ed3e4c807f83f6dc0e0cd data/environmenttech/recipes/environmental_essence.json
+935db7eeeeb437ba83909ba578f14109f62485ef data/environmenttech/recipes/glass_tank.json

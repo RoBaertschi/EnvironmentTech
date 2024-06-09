@@ -4,55 +4,55 @@
     {
       "model": "environmenttech:item/env_detector_0",
       "predicate": {
-        "minecraft:custom_model_data": 0.0
+        "environmenttech:filled": 0.0
       }
     },
     {
       "model": "environmenttech:item/env_detector_1",
       "predicate": {
-        "minecraft:custom_model_data": 1.0
+        "environmenttech:filled": 1.0
       }
     },
     {
       "model": "environmenttech:item/env_detector_2",
       "predicate": {
-        "minecraft:custom_model_data": 2.0
+        "environmenttech:filled": 2.0
       }
     },
     {
       "model": "environmenttech:item/env_detector_3",
       "predicate": {
-        "minecraft:custom_model_data": 3.0
+        "environmenttech:filled": 3.0
       }
     },
     {
       "model": "environmenttech:item/env_detector_4",
       "predicate": {
-        "minecraft:custom_model_data": 4.0
+        "environmenttech:filled": 4.0
       }
     },
     {
       "model": "environmenttech:item/env_detector_5",
       "predicate": {
-        "minecraft:custom_model_data": 5.0
+        "environmenttech:filled": 5.0
       }
     },
     {
       "model": "environmenttech:item/env_detector_6",
       "predicate": {
-        "minecraft:custom_model_data": 6.0
+        "environmenttech:filled": 6.0
       }
     },
     {
       "model": "environmenttech:item/env_detector_7",
       "predicate": {
-        "minecraft:custom_model_data": 7.0
+        "environmenttech:filled": 7.0
       }
     },
     {
       "model": "environmenttech:item/env_detector_8",
       "predicate": {
-        "minecraft:custom_model_data": 8.0
+        "environmenttech:filled": 8.0
       }
     }
   ]

@@ -12,7 +12,6 @@ import robaertschi.environmenttech.level.particle.EnvParticle;
 
 @AllArgsConstructor()
 public class EnvParticleProvider implements ParticleProvider<SimpleParticleType> {
-    private final double SPEED_FACTOR = 0.25;
     private final SpriteSet spriteSet;
 
 

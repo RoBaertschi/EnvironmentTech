@@ -1,23 +1,21 @@
 package robaertschi.environmenttech.level.item;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.CustomModelData;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import robaertschi.environmenttech.data.attachments.ETAttachments;
+import robaertschi.environmenttech.data.components.ETComponents;
+import robaertschi.environmenttech.data.components.FilledComponent;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.List;
-import java.util.Optional;
 
 @ParametersAreNonnullByDefault
 public class EnvDetectorItem extends Item {
@@ -26,7 +24,6 @@ public class EnvDetectorItem extends Item {
     public EnvDetectorItem(Properties properties) {
         super(properties);
     }
-
 
     @Override
     public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
@@ -46,7 +43,7 @@ public class EnvDetectorItem extends Item {
                 steps = STEPS;
             }
 
-            pPlayer.getItemInHand(pUsedHand).set(DataComponents.CUSTOM_MODEL_DATA, new CustomModelData((int)steps));
+            pPlayer.getItemInHand(pUsedHand).set(ETComponents.FILLED_COMPONENT.get(), new FilledComponent((int)steps));
 
 //            pPlayer.displayClientMessage(Component.literal("Chunk has " + chunk.getData(ETAttachments.ENV) + " ENV").withStyle(ChatFormatting.GREEN), true);
         } else {

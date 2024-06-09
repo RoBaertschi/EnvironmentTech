@@ -3,7 +3,6 @@ package robaertschi.environmenttech.level.block.entity.renderer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -12,7 +11,6 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -27,6 +25,7 @@ import java.util.Objects;
 
 @ParametersAreNonnullByDefault
 public class EnvCollectorRenderer implements BlockEntityRenderer<EnvCollectorBlockEntity> {
+    @SuppressWarnings("unused")
     public EnvCollectorRenderer(BlockEntityRendererProvider.Context context) {}
     public int spawnParticle = 0;
 

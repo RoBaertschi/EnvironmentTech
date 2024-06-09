@@ -1,6 +1,6 @@
-// 1.20.6	2024-06-09T12:43:39.789774136	Item Models: environmenttech
+// 1.20.6	2024-06-09T17:17:47.56778268	Item Models: environmenttech
 ee3837b261f3dbe2001ba1192716f0fdf144b663 assets/environmenttech/models/item/env_collector.json
-aa962e881326461668467281df08b7b82fcc3fd6 assets/environmenttech/models/item/env_detector.json
+719f96ed0245a9dc7c32294d66055e76fc594e30 assets/environmenttech/models/item/env_detector.json
 e6d7f80a803863d6196f53d67487af2b3644323b assets/environmenttech/models/item/env_detector_0.json
 8f94bb9cdf778fafd04225c255a740669597a4f3 assets/environmenttech/models/item/env_detector_1.json
 e0d2aa063a62122c33bdf28bd675d8cd0823465c assets/environmenttech/models/item/env_detector_2.json
@@ -11,3 +11,4 @@ b7bfd8c3f18761814a2c3562bba8aa5da4d6e553 assets/environmenttech/models/item/env_
 5acb213593a6932b20ac83a20cc30803631d519d assets/environmenttech/models/item/env_detector_7.json
 ba599a8c31f0b4f9c41d5a5f79a83db41c29cb49 assets/environmenttech/models/item/env_detector_8.json
 f3f1594483691b7873d0679104a892bae138e925 assets/environmenttech/models/item/environmental_essence.json
+a7c7074a907b7e00d0d320bd7bc4d7245eb58f19 assets/environmenttech/models/item/glass_tank.json

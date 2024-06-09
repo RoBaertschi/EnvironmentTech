@@ -3,9 +3,6 @@ package robaertschi.environmenttech.level.block.entity;
 import lombok.Getter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponentPatch;
-import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
@@ -40,6 +37,7 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
     public static final int SLOT_INPUT = 0;
     public static final int SLOT_INPUT_COUNT = 1;
 
+    @SuppressWarnings("unused")
     public static final int SLOT_OUTPUT = 0;
     public static final int SLOT_OUTPUT_COUNT = 1;
 
@@ -47,7 +45,6 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
     public static final String INVENTORY_KEY = "Inventory";
     public static final String ENV_KEY = "ENV";
     public static final String PROGRESS_KEY = "Progress";
-    public static final String MAX_PROGRESS_KEY = "MaxProgress";
 
     @Getter
     private final ItemStackHandler inventory = new ItemStackHandler(2) {
@@ -153,6 +150,7 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
         return this.inventory.getStackInSlot(1);
     }
 
+    @SuppressWarnings("unused")
     public void setInputItem(ItemStack itemStack) {
         this.inventory.setStackInSlot(0, itemStack);
     }
@@ -163,7 +161,7 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
     }
 
 
-    public void serverTick(ServerLevel level, BlockPos blockPos, BlockState blockState) {
+    public void serverTick(ServerLevel level, BlockPos blockPos, @SuppressWarnings("unused") BlockState blockState) {
 
         if (takeEnv <= 0) {
             ChunkAccess currentChunk = level.getChunkAt(blockPos);
@@ -179,8 +177,6 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
         if (hasRecipe(level)) {
             if (progress > 0 && progress < getMaxProgress()) {
                 progress++;
-//                setChanged();
-//                level.sendBlockUpdated(getBlockPos(), blockState, blockState, Block.UPDATE_CLIENTS);
             } else if (progress > 0) {
                 produce(level);
                 progress = 0;

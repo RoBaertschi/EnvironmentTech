@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "h": {
+      "item": "minecraft:hopper"
+    },
+    "l": {
+      "item": "minecraft:oak_log"
+    },
+    "p": {
+      "item": "minecraft:oak_planks"
+    }
+  },
+  "pattern": [
+    "lhl",
+    "l l",
+    "ppp"
+  ],
+  "result": {
+    "count": 1,
+    "id": "environmenttech:env_collector"
+  }
+}

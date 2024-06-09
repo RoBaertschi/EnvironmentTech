@@ -12,6 +12,7 @@ import static robaertschi.environmenttech.EnvironmentTech.MODID;
 public class ETBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, MODID);
 
+    @SuppressWarnings("DataFlowIssue")
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EnvCollectorBlockEntity>> ENV_COLLECTOR_BLOCK_ENTITY =
             BLOCK_ENTITIES.register("env_collector",
                     () -> BlockEntityType.Builder.of(EnvCollectorBlockEntity::new,

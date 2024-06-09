@@ -96,7 +96,7 @@ runs {
     // applies to all the run configs below
 
     configureEach {
-        // Recommended logging data for a userdev environment
+        // Recommended logging data for an userdev environment
         // The markers can be added/remove as needed separated by commas.
         // "SCAN": For mods scan.
         // "REGISTRIES": For firing of registry events.

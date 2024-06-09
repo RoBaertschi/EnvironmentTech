@@ -15,6 +15,7 @@ import robaertschi.environmenttech.level.block.entity.EnvCollectorBlockEntity;
 import static robaertschi.environmenttech.level.block.entity.EnvCollectorBlockEntity.SLOT_COUNT;
 import static robaertschi.environmenttech.level.block.entity.EnvCollectorBlockEntity.SLOT_INPUT;
 
+@SuppressWarnings("SameParameterValue")
 public class EnvCollectorMenu extends AbstractContainerMenu {
 
     @Getter
@@ -53,6 +54,7 @@ public class EnvCollectorMenu extends AbstractContainerMenu {
         return index;
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     private int addSlotBox(Container playerInventory, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
         for (int j = 0 ; j < verAmount ; j++) {
             index = addSlotRange(playerInventory, index, x, y, horAmount, dx);

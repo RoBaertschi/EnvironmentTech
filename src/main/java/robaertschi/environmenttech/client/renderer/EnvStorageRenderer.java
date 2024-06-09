@@ -1,9 +1,5 @@
 package robaertschi.environmenttech.client.renderer;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Lombok;
-import lombok.RequiredArgsConstructor;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;

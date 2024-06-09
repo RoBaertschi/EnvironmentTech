@@ -16,6 +16,7 @@ public class ETAttachments {
             "env", () -> AttachmentType.builder(() -> 0L).serialize(Codec.LONG).build()
     );
 
+
     public static void init(IEventBus eventBus) {
         ATTACHMENT_TYPES.register(eventBus);
     }

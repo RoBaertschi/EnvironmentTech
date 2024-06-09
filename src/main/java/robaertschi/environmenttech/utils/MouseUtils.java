@@ -1,6 +1,7 @@
 package robaertschi.environmenttech.utils;
 
 public class MouseUtils {
+    @SuppressWarnings("unused")
     public static boolean isMouseOver(double mouseX, double mouseY, int x, int y) {
         return isMouseOver(mouseX, mouseY, x, y, 16);
     }

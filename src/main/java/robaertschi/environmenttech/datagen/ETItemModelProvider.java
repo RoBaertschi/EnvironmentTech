@@ -6,6 +6,7 @@ import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import robaertschi.environmenttech.EnvironmentTech;
 import robaertschi.environmenttech.level.block.ETBlocks;
 import robaertschi.environmenttech.level.item.ETItems;
 import robaertschi.environmenttech.level.item.EnvDetectorItem;
@@ -21,6 +22,7 @@ public class ETItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         withExistingParent(ETBlocks.ENV_COLLECTOR_BLOCK.getId().getPath(), modLoc("block/" + "env_collector"));
         basicItem(ETItems.ENVIRONMENTAL_ESSENCE_ITEM.get());
+        basicItem(ETItems.GLASS_TANK.get());
         registerEnvDetector();
     }
 
@@ -33,7 +35,7 @@ public class ETItemModelProvider extends ItemModelProvider {
             ItemModelBuilder sub_item_builder = getBuilder("env_detector_" + i);
             sub_item_builder.parent(new ModelFile.ExistingModelFile(new ResourceLocation("minecraft", "item/generated"), existingFileHelper));
             sub_item_builder.texture("layer0", modLoc("item/env_detector_" + i));
-            builder.override().predicate(new ResourceLocation("custom_model_data"), i).model(sub_item_builder);
+            builder.override().predicate(EnvironmentTech.id("filled"), i).model(sub_item_builder);
         }
     }
 

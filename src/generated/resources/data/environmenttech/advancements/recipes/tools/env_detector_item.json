@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "glass_tank": {
+      "conditions": {
+        "items": [
+          {
+            "items": "environmenttech:glass_tank"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "environmenttech:env_detector_item"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "hopper": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:hopper"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "stick": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#c:rods/wooden"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "glass_tank",
+      "hopper",
+      "stick"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "environmenttech:env_detector_item"
+    ]
+  }
+}

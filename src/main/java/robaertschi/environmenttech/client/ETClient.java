@@ -2,7 +2,7 @@ package robaertschi.environmenttech.client;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
@@ -12,8 +12,11 @@ import org.lwjgl.glfw.GLFW;
 import robaertschi.environmenttech.EnvironmentTech;
 import robaertschi.environmenttech.client.particle.EnvParticleProvider;
 import robaertschi.environmenttech.client.screen.EnvCollectorScreen;
+import robaertschi.environmenttech.data.components.ETComponents;
+import robaertschi.environmenttech.data.components.FilledComponent;
 import robaertschi.environmenttech.level.block.entity.ETBlockEntities;
 import robaertschi.environmenttech.level.block.entity.renderer.EnvCollectorRenderer;
+import robaertschi.environmenttech.level.item.ETItems;
 import robaertschi.environmenttech.level.particle.ETParticles;
 import robaertschi.environmenttech.menu.ETMenus;
 
@@ -28,8 +31,12 @@ public class ETClient {
     ));
 
     @SubscribeEvent
-    public static void setup(FMLClientSetupEvent event) {
-
+    public static void clientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> ItemProperties.register(
+                ETItems.ENV_DETECTOR_ITEM.get(),
+                EnvironmentTech.id("filled"),
+                (pStack, pLevel, pEntity, pSeed) ->  pStack.getOrDefault(ETComponents.FILLED_COMPONENT, new FilledComponent(0)).filled()
+        ));
     }
 
     @SubscribeEvent
@@ -52,8 +59,5 @@ public class ETClient {
         if (EnvironmentTech.DEBUG) {
             event.register(OPEN_DEBUG_MENU.get());
         }
-    }
-
-    public static void onClientTickEnd(ClientTickEvent.Post event) {
     }
 }
