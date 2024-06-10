@@ -7,7 +7,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -23,25 +22,15 @@ import robaertschi.environmenttech.level.item.ETItems;
 import robaertschi.environmenttech.level.particle.ETParticles;
 import robaertschi.environmenttech.menu.ETMenus;
 
-@SuppressWarnings("unused")
 @Mod(EnvironmentTech.MODID)
 public class EnvironmentTech
 {
-    public static final boolean DEBUG;
 
     public static final String MODID = "environmenttech";
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static ResourceLocation id(String name) {
         return new ResourceLocation(MODID, name);
-    }
-
-    static {
-        // Why a static block? Because I can.
-
-        // Enable debugging Tools and Screen
-        // TODO: Add a config entry for modpack devs and so on.
-        DEBUG = !FMLLoader.isProduction();
     }
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.

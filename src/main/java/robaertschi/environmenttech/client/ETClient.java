@@ -23,13 +23,6 @@ import robaertschi.environmenttech.menu.ETMenus;
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 public class ETClient {
 
-    public static final Lazy<KeyMapping> OPEN_DEBUG_MENU = Lazy.of(() -> new KeyMapping(
-            "key.environmenttech.open_debug_menu",
-            InputConstants.Type.KEYSYM,
-            GLFW.GLFW_KEY_U,
-            "key.categories.environmenttech"
-    ));
-
     @SubscribeEvent
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> ItemProperties.register(
@@ -56,8 +49,5 @@ public class ETClient {
 
     @SubscribeEvent
     public static void registerBindings(RegisterKeyMappingsEvent event) {
-        if (EnvironmentTech.DEBUG) {
-            event.register(OPEN_DEBUG_MENU.get());
-        }
     }
 }
