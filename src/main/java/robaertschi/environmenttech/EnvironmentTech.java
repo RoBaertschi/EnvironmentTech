@@ -48,7 +48,7 @@ public class EnvironmentTech
         ETCapabilities.init(modEventBus);
         ETMenus.init(modEventBus);
         ETParticles.init(modEventBus);
-        ETComponents.DATA_COMPONENTS.register(modEventBus);
+        ETComponents.init(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
 
