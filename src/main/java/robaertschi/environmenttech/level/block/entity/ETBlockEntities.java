@@ -6,6 +6,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import robaertschi.environmenttech.level.block.ETBlocks;
+import robaertschi.environmenttech.level.block.EnvDistributorBlock;
 
 import static robaertschi.environmenttech.EnvironmentTech.MODID;
 
@@ -17,6 +18,10 @@ public class ETBlockEntities {
             BLOCK_ENTITIES.register("env_collector",
                     () -> BlockEntityType.Builder.of(EnvCollectorBlockEntity::new,
                             ETBlocks.ENV_COLLECTOR_BLOCK.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EnvDistributorBlockEntity>> ENV_DISTRIBUTOR_BLOCK_ENTITY =
+            BLOCK_ENTITIES.register("env_distributor",
+                    () -> BlockEntityType.Builder.of(EnvDistributorBlockEntity::new, ETBlocks.ENV_DISTRIBUTOR_BLOCK.get()).build(null));
 
     public static void init(IEventBus iEventBus) {
         BLOCK_ENTITIES.register(iEventBus);

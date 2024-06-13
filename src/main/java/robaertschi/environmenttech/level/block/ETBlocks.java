@@ -13,6 +13,7 @@ public class ETBlocks {
     // Creates a new Block with the id "environmenttech:example_block", combining the namespace and path
 //    public static final DeferredBlock<Block> EXAMPLE_BLOCK = BLOCKS.registerSimpleBlock("example_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<EnvCollectorBlock> ENV_COLLECTOR_BLOCK = BLOCKS.registerBlock("env_collector", EnvCollectorBlock::new, BlockBehaviour.Properties.of());
+    public static final DeferredBlock<EnvDistributorBlock> ENV_DISTRIBUTOR_BLOCK =BLOCKS.registerBlock("env_distributor", EnvDistributorBlock::new, BlockBehaviour.Properties.of());
 
 
     public static void init(IEventBus iEventBus) {

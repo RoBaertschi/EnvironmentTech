@@ -223,8 +223,6 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
             }
 
         }
-
-
     }
 
     private void produce(ServerLevel level) {
