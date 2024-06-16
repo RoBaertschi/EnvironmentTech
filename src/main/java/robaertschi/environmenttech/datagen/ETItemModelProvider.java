@@ -29,11 +29,11 @@ public class ETItemModelProvider extends ItemModelProvider {
     private void registerEnvDetector() {
 
         ItemModelBuilder builder = getBuilder("env_detector");
-        builder.parent(new ModelFile.ExistingModelFile(new ResourceLocation("minecraft", "item/generated"), existingFileHelper));
+        builder.parent(new ModelFile.ExistingModelFile(ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated"), existingFileHelper));
 
         for (int i = 0; i < EnvDetectorItem.STEPS; i++) {
             ItemModelBuilder sub_item_builder = getBuilder("env_detector_" + i);
-            sub_item_builder.parent(new ModelFile.ExistingModelFile(new ResourceLocation("minecraft", "item/generated"), existingFileHelper));
+            sub_item_builder.parent(new ModelFile.ExistingModelFile(ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated"), existingFileHelper));
             sub_item_builder.texture("layer0", modLoc("item/env_detector_" + i));
             builder.override().predicate(EnvironmentTech.id("filled"), i).model(sub_item_builder);
         }

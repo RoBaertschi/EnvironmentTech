@@ -6,7 +6,7 @@ plugins {
     idea
     `maven-publish`
     id("io.freefair.lombok") version "8.6"
-    id ("net.neoforged.gradle.userdev") version ("7.0.142")
+    id ("net.neoforged.gradle.userdev") version ("7.0.143")
 }
 
 val minecraftVersion: String by project

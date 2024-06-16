@@ -30,7 +30,7 @@ public class EnvironmentTech
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static ResourceLocation id(String name) {
-        return new ResourceLocation(MODID, name);
+        return ResourceLocation.fromNamespaceAndPath(MODID, name);
     }
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.

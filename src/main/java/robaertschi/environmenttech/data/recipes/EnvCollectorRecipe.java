@@ -13,10 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,14 +21,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public record EnvCollectorRecipe(Ingredient input, ItemStack output, int envUsed) implements Recipe<Container> {
+public record EnvCollectorRecipe(Ingredient input, ItemStack output, int envUsed) implements Recipe<RecipeInput> {
     @Override
-    public boolean matches(@NotNull Container pContainer, @NotNull Level pLevel) {
+    public boolean matches(@NotNull RecipeInput pContainer, @NotNull Level pLevel) {
         return this.input.test(pContainer.getItem(0));
     }
 
     @Override
-    public @NotNull ItemStack assemble(@NotNull Container pCraftingContainer, HolderLookup.@NotNull Provider pRegistries) {
+    public @NotNull ItemStack assemble(@NotNull RecipeInput pCraftingContainer, HolderLookup.@NotNull Provider pRegistries) {
         return this.output.copy();
     }
 

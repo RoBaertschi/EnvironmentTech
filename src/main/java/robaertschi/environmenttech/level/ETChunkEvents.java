@@ -17,7 +17,7 @@ public class ETChunkEvents {
     public static void onChunkLoad(ChunkEvent.Load event) {
         if (event.getLevel().isClientSide()) return;
         if (event.isNewChunk() && event.getChunk() instanceof LevelChunk levelChunk && !event.getChunk().hasData(ETAttachments.ENV)) {
-            if (levelChunk.getStatus() != ChunkStatus.FULL) {
+            if (levelChunk.getPersistedStatus() != ChunkStatus.FULL) {
                 return;
             }
             int random = event.getLevel().getRandom().nextIntBetweenInclusive(Config.minEnvForNewChunk, Config.maxEnvForNewChunk);
