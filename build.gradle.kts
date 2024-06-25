@@ -27,6 +27,8 @@ val junitVersion: String by project
 val assertjVersion: String by project
 val topVersion: String by project
 val reiVersion: String by project
+val jeiVersion: String by project
+val jeiMcVersion: String by project
 
 version = modVersion
 group = modGroupId
@@ -177,9 +179,9 @@ dependencies {
 
     // Example mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
-//     compileOnly("mezz.jei:jei-${minecraftVersion}-common-api:${jei_version}")
-//     compileOnly("mezz.jei:jei-${minecraftVersion}-forge-api:${jei_version}")
-//     runtimeOnly("mezz.jei:jei-${minecraftVersion}-forge:${jei_version}")
+//     compileOnly("mezz.jei:jei-${jeiMcVersion}-common-api:${jeiVersion}")
+//     compileOnly("mezz.jei:jei-${jeiMcVersion}-neoforge-api:${jeiVersion}")
+//     runtimeOnly("mezz.jei:jei-${jeiMcVersion}-neoforge:${jeiVersion}")
 
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
