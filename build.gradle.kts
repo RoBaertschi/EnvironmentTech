@@ -6,7 +6,7 @@ plugins {
     idea
     `maven-publish`
     id("io.freefair.lombok") version "8.6"
-    id ("net.neoforged.gradle.userdev") version ("7.0.143")
+    id ("net.neoforged.gradle.userdev") version ("7.0.150")
 }
 
 val minecraftVersion: String by project
@@ -38,10 +38,17 @@ repositories {
     }
     maven {
         url = URI.create("https://maven.blamejared.com")
+        name = "BlameJared"
     }
 
-    maven { url = URI.create("https://maven.shedaniel.me/") }
-    maven { url = URI.create("https://maven.architectury.dev/") }
+    maven {
+        url = URI.create("https://maven.shedaniel.me/")
+        name = "Shedaniel"
+    }
+    maven {
+        url = URI.create("https://maven.architectury.dev/")
+        name = "Architectury"
+    }
 }
 
 base {
@@ -155,9 +162,7 @@ dependencies {
     // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
     implementation ("net.neoforged:neoforge:${neoVersion}")
 
-    // Wait until 1.20.6 has a stable neoforge version, so that all mods should work when updated
-//    implementation("mcjty.theoneprobe:theoneprobe:${topVersion}")
-//
+    implementation("mcjty.theoneprobe:theoneprobe:${topVersion}")
 //    runtimeOnly("me.shedaniel:RoughlyEnoughItems-neoforge:${reiVersion}")
 //    compileOnly("me.shedaniel:RoughlyEnoughItems-api-neoforge:${reiVersion}")
 //    compileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-neoforge:${reiVersion}")
