@@ -99,10 +99,7 @@ configurations["junitImplementation"].extendsFrom(configurations.implementation.
 //minecraft.accessTransformers.entry public net.minecraft.client.Minecraft textureManager # textureManager
 
 
-// Default run configurations.
-// These can be tweaked, removed, or duplicated as needed.
 runs {
-    // applies to all the run configs below
 
     configureEach {
         // Recommended logging data for an userdev environment
@@ -112,9 +109,6 @@ runs {
         // "REGISTRYDUMP": For getting the contents of all registries.
         systemProperty ("forge.logging.markers", "REGISTRIES")
 
-        // Recommended logging level for the console
-        // You can set various levels here.
-        // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
         systemProperty ("forge.logging.console.level", "debug")
 
         modSource (project.sourceSets["main"])
@@ -136,9 +130,6 @@ runs {
         programArgument ("--nogui")
     }
 
-    // This run config launches GameTestServer and runs all registered gametests, then exits.
-    // By default, the server will crash when no gametests are provided.
-    // The gametest system is also enabled by default for other run configs under the /test command.
     create("gameTestServer") {
         systemProperty ("forge.enabledGameTestNamespaces", modId)
 
@@ -146,22 +137,12 @@ runs {
 
 
     create("data") {
-        // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
-        // workingDirectory project.file("run-data")
-
-        // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
         programArguments.addAll ("--mod", modId, "--all", "--output", file("src/generated/resources/").absolutePath, "--existing", file("src/main/resources/").absolutePath)
     }
 
 }
 
 dependencies {
-    // Specify the version of Minecraft to use.
-    // Depending on the plugin applied there are several options. We will assume you applied the userdev plugin as shown above.
-    // The group for userdev is net.neoforge, the module name is neoforge, and the version is the same as the neoforge version.
-    // You can however also use the vanilla plugin (net.neoforged.gradle.vanilla) to use a version of Minecraft without the neoforge loader.
-    // And its provides the option to then use net.minecraft as the group, and one of; client, server or joined as the module name, plus the game version as version.
-    // For all intends and purposes: You can treat this dependency as if it is a normal library you would use.
     implementation ("net.neoforged:neoforge:${neoVersion}")
 
     implementation("mcjty.theoneprobe:theoneprobe:${topVersion}")
@@ -179,9 +160,9 @@ dependencies {
 
     // Example mod dependency with JEI
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
-//     compileOnly("mezz.jei:jei-${jeiMcVersion}-common-api:${jeiVersion}")
-//     compileOnly("mezz.jei:jei-${jeiMcVersion}-neoforge-api:${jeiVersion}")
-//     runtimeOnly("mezz.jei:jei-${jeiMcVersion}-neoforge:${jeiVersion}")
+     compileOnly("mezz.jei:jei-${jeiMcVersion}-common-api:${jeiVersion}")
+     compileOnly("mezz.jei:jei-${jeiMcVersion}-neoforge-api:${jeiVersion}")
+     runtimeOnly("mezz.jei:jei-${jeiMcVersion}-neoforge:${jeiVersion}")
 
     // Example mod dependency using a mod jar from ./libs with a flat dir repository
     // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar

@@ -5,16 +5,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
 import org.jetbrains.annotations.NotNull;
 import robaertschi.environmenttech.data.attachments.ETAttachments;
 import robaertschi.environmenttech.data.capabilities.EnvStorage;
 import robaertschi.environmenttech.data.capabilities.EnvType;
-import robaertschi.environmenttech.data.components.ETComponents;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -22,7 +19,7 @@ import static robaertschi.environmenttech.EnvironmentTech.MODID;
 
 @Getter
 @ParametersAreNonnullByDefault
-public class EnvDistributorBlockEntity extends BlockEntity {
+public class EnvDistributorBlockEntity extends BlockEntity implements ITickableBlockEntity {
 
     public static final String ENV_TAG = "Env";
     private final EnvStorage envStorage = new EnvStorage(EnvType.Chunk, 64) {
@@ -55,6 +52,7 @@ public class EnvDistributorBlockEntity extends BlockEntity {
         pTag.put(MODID, modData);
     }
 
+    @Override
     public void serverTick(ServerLevel level, BlockPos blockPos, BlockState blockState) {
         if (envStorage.getEnvStored() > 0) {
             ChunkAccess chunk = level.getChunk(blockPos);

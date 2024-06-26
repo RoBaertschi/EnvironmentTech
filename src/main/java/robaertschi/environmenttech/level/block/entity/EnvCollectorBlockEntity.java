@@ -17,7 +17,6 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeInput;
-import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,7 +26,6 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
-import net.neoforged.neoforge.items.wrapper.RecipeWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import robaertschi.environmenttech.data.attachments.ETAttachments;
@@ -40,7 +38,7 @@ import robaertschi.environmenttech.menu.EnvCollectorMenu;
 
 import static robaertschi.environmenttech.EnvironmentTech.MODID;
 
-public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider {
+public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider, ITickableBlockEntity {
     public static final int SLOT_INPUT = 0;
     public static final int SLOT_INPUT_COUNT = 1;
 
@@ -207,6 +205,7 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
     }
 
 
+    @Override
     public void serverTick(ServerLevel level, BlockPos blockPos, @SuppressWarnings("unused") BlockState blockState) {
 
         if (takeEnv <= 0) {
