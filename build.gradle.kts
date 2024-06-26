@@ -6,7 +6,7 @@ plugins {
     idea
     `maven-publish`
     id("io.freefair.lombok") version "8.6"
-    id ("net.neoforged.gradle.userdev") version ("7.0.150")
+    id ("net.neoforged.gradle.userdev") version ("7.0.151")
 }
 
 val minecraftVersion: String by project
@@ -29,6 +29,7 @@ val topVersion: String by project
 val reiVersion: String by project
 val jeiVersion: String by project
 val jeiMcVersion: String by project
+val emiVersion: String by project
 
 val withTop = true
 
@@ -52,6 +53,10 @@ repositories {
     maven {
         url = URI.create("https://maven.architectury.dev/")
         name = "Architectury"
+    }
+    maven {
+        url = URI.create("https://maven.terraformersmc.com/")
+        name = "TerraformersMC"
     }
 }
 
@@ -132,6 +137,9 @@ runs {
         programArgument ("--nogui")
     }
 
+    // This run config launches GameTestServer and runs all registered gametests, then exits.
+    // By default, the server will crash when no gametests are provided.
+    // The gametest system is also enabled by default for other run configs under the /test command.
     create("gameTestServer") {
         systemProperty ("forge.enabledGameTestNamespaces", modId)
 
@@ -139,6 +147,10 @@ runs {
 
 
     create("data") {
+        // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
+        // workingDirectory project.file("run-data")
+
+        // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
         programArguments.addAll ("--mod", modId, "--all", "--output", file("src/generated/resources/").absolutePath, "--existing", file("src/main/resources/").absolutePath)
     }
 
@@ -150,6 +162,8 @@ dependencies {
     compileOnly("mcjty.theoneprobe:theoneprobe:${topVersion}")
     if (withTop)
         runtimeOnly("mcjty.theoneprobe:theoneprobe:${topVersion}")
+//    compileOnly("dev.emi:emi-neoforge:${emiVersion}:api")
+//    runtimeOnly("dev.emi:emi-neoforge:${emiVersion}")
 //    runtimeOnly("me.shedaniel:RoughlyEnoughItems-neoforge:${reiVersion}")
 //    compileOnly("me.shedaniel:RoughlyEnoughItems-api-neoforge:${reiVersion}")
 //    compileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-neoforge:${reiVersion}")
