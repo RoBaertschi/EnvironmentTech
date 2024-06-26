@@ -50,8 +50,8 @@ public class EnvCollectorScreen extends AbstractContainerScreen<EnvCollectorMenu
 
     @Override
     public void render(@NotNull GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        renderBackground(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
+
         this.renderTooltip(pGuiGraphics, pMouseX, pMouseY);
     }
 

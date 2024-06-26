@@ -30,6 +30,8 @@ val reiVersion: String by project
 val jeiVersion: String by project
 val jeiMcVersion: String by project
 
+val withTop = true
+
 version = modVersion
 group = modGroupId
 
@@ -145,7 +147,9 @@ runs {
 dependencies {
     implementation ("net.neoforged:neoforge:${neoVersion}")
 
-    implementation("mcjty.theoneprobe:theoneprobe:${topVersion}")
+    compileOnly("mcjty.theoneprobe:theoneprobe:${topVersion}")
+    if (withTop)
+        runtimeOnly("mcjty.theoneprobe:theoneprobe:${topVersion}")
 //    runtimeOnly("me.shedaniel:RoughlyEnoughItems-neoforge:${reiVersion}")
 //    compileOnly("me.shedaniel:RoughlyEnoughItems-api-neoforge:${reiVersion}")
 //    compileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-neoforge:${reiVersion}")

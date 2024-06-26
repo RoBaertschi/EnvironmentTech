@@ -1,6 +1,9 @@
 package robaertschi.environmenttech.level.block.entity;
 
 import lombok.Getter;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -28,6 +31,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import robaertschi.environmenttech.compat.top.TOPInfoProvider;
 import robaertschi.environmenttech.data.attachments.ETAttachments;
 import robaertschi.environmenttech.data.capabilities.AdaptedItemHandler;
 import robaertschi.environmenttech.data.capabilities.EnvStorage;
@@ -38,7 +42,7 @@ import robaertschi.environmenttech.menu.EnvCollectorMenu;
 
 import static robaertschi.environmenttech.EnvironmentTech.MODID;
 
-public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider, ITickableBlockEntity {
+public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider, ITickableBlockEntity, TOPInfoProvider {
     public static final int SLOT_INPUT = 0;
     public static final int SLOT_INPUT_COUNT = 1;
 
@@ -290,5 +294,14 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, @NotNull Inventory pPlayerInventory, @NotNull Player pPlayer) {
         return new EnvCollectorMenu(pContainerId, pPlayer, this, data);
+    }
+
+    @Override
+    public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, Player player, Level level, BlockState blockState, IProbeHitData data) {
+        if (hasRecipe(level)) {
+            probeInfo.horizontal().progress(getProgress(), getMaxProgress(),
+                    probeInfo.defaultProgressStyle().suffix("%")
+            );
+        }
     }
 }

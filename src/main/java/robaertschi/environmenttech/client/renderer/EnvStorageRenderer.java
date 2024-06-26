@@ -26,6 +26,10 @@ import java.util.Optional;
  * @since 0.1.0
  */
 public class EnvStorageRenderer {
+    public static final int from = FastColor.ARGB32.color(0, 103, 29);
+    public static final int to = FastColor.ARGB32.color(0,191, 38);
+
+
     private final int x;
     private final int y;
     private final int width;
@@ -56,8 +60,6 @@ public class EnvStorageRenderer {
 
         boxRenderer.render(guiGraphics);
 
-        int from = FastColor.ARGB32.color(0, 103, 29);
-        int to = FastColor.ARGB32.color(0,191, 38);
         guiGraphics.fillGradient(x, y + (height - stored), x + width, y + height,
                 from, to);
 

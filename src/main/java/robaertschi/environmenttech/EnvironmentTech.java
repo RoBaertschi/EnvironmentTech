@@ -9,9 +9,9 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
-import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import org.slf4j.Logger;
 import robaertschi.environmenttech.command.EnvironmenttechCommand;
+import robaertschi.environmenttech.compat.ETCompat;
 import robaertschi.environmenttech.data.attachments.ETAttachments;
 import robaertschi.environmenttech.data.capabilities.ETCapabilities;
 import robaertschi.environmenttech.data.components.ETComponents;
@@ -49,6 +49,7 @@ public class EnvironmentTech
         ETMenus.init(modEventBus);
         ETParticles.init(modEventBus);
         ETComponents.init(modEventBus);
+        ETCompat.init(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
 
@@ -60,14 +61,14 @@ public class EnvironmentTech
     }
 
 
-    @SubscribeEvent()
-    public void onPlayerTick(PlayerTickEvent.Post event) {
-        var level = event.getEntity().level();
-        if (level.isClientSide()) {
-            return;
-        }
-        var env = level.getChunk(event.getEntity().blockPosition()).getData(ETAttachments.ENV);
-//        event.getEntity().sendSystemMessage(Component.literal("ENV in chunk: " + env));
-
-    }
+//    @SubscribeEvent()
+//    public void onPlayerTick(PlayerTickEvent.Post event) {
+//        var level = event.getEntity().level();
+//        if (level.isClientSide()) {
+//            return;
+//        }
+//        var env = level.getChunk(event.getEntity().blockPosition()).getData(ETAttachments.ENV);
+////        event.getEntity().sendSystemMessage(Component.literal("ENV in chunk: " + env));
+//
+//    }
 }

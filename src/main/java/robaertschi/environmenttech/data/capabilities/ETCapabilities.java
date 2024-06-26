@@ -42,6 +42,15 @@ public class ETCapabilities {
                     return null;
                 }
         );
+
+        event.registerBlockEntity(
+                ENV_STORAGE_BLOCK,
+                ETBlockEntities.ENV_DISTRIBUTOR_BLOCK_ENTITY.get(),
+                (object, context) -> {
+                    if (context == EnvType.Chunk) return object.getEnvStorage();
+                    return null;
+                }
+        );
     }
 
 }
