@@ -56,7 +56,7 @@ public class EnvDistributorBlockEntity extends BlockEntity implements ITickableB
     public void serverTick(ServerLevel level, BlockPos blockPos, BlockState blockState) {
         if (envStorage.getEnvStored() > 0) {
             ChunkAccess chunk = level.getChunk(blockPos);
-            long value = Math.min(20, envStorage.getEnvStored());
+            long value = Math.min(5, envStorage.getEnvStored());
             chunk.setData(ETAttachments.ENV, chunk.getData(ETAttachments.ENV) + value);
             envStorage.setEnvStored(envStorage.getEnvStored() - value);
         }
