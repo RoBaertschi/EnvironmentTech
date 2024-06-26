@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "environmenttech:block/env_distributor",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "environmenttech:block/env_distributor"
+    },
+    "facing=south": {
+      "model": "environmenttech:block/env_distributor",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "environmenttech:block/env_distributor",
+      "y": 270
+    }
+  }
+}

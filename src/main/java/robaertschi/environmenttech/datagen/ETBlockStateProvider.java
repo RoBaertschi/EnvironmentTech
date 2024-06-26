@@ -17,5 +17,6 @@ public class ETBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
 //        registerEnvCollector();
         horizontalBlock(ETBlocks.ENV_COLLECTOR_BLOCK.get(), new ModelFile.UncheckedModelFile(modLoc("block/env_collector")));
+        horizontalBlock(ETBlocks.ENV_DISTRIBUTOR_BLOCK.get(), new ModelFile.UncheckedModelFile(modLoc("block/env_distributor")));
     }
 }
