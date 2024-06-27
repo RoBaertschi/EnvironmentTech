@@ -1,11 +1,19 @@
+/*
+ *  EnvironmentTech  Copyright (C) 2024 Robin Bärtschi
+ *  This program comes with ABSOLUTELY NO WARRANTY; for details open the file LICENSE at the root of the source code.
+ *  This is free software, and you are welcome to redistribute it
+ *  under certain conditions; read the LICENSE file at the root of the source code for details.
+ */
 package robaertschi.environmenttech.client.screen;
+
+import org.jetbrains.annotations.NotNull;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import org.jetbrains.annotations.NotNull;
+
 import robaertschi.environmenttech.EnvironmentTech;
 import robaertschi.environmenttech.client.renderer.EnvStorageRenderer;
 import robaertschi.environmenttech.menu.EnvCollectorMenu;

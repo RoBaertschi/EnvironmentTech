@@ -1,4 +1,14 @@
+/*
+ *  EnvironmentTech  Copyright (C) 2024 Robin Bärtschi
+ *  This program comes with ABSOLUTELY NO WARRANTY; for details open the file LICENSE at the root of the source code.
+ *  This is free software, and you are welcome to redistribute it
+ *  under certain conditions; read the LICENSE file at the root of the source code for details.
+ */
 package robaertschi.environmenttech.compat.jei;
+
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.ParametersAreNonnullByDefault;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -8,22 +18,20 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
+
 import robaertschi.environmenttech.client.renderer.EnvStorageRenderer;
 import robaertschi.environmenttech.client.screen.EnvCollectorScreen;
 import robaertschi.environmenttech.data.recipes.ETRecipes;
 import robaertschi.environmenttech.data.recipes.EnvCollectorRecipe;
 import robaertschi.environmenttech.level.block.ETBlocks;
 import robaertschi.environmenttech.utils.MouseUtils;
-
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.ArrayList;
-import java.util.List;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault

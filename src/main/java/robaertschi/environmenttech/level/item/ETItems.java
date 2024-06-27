@@ -1,4 +1,15 @@
+/*
+ *  EnvironmentTech  Copyright (C) 2024 Robin Bärtschi
+ *  This program comes with ABSOLUTELY NO WARRANTY; for details open the file LICENSE at the root of the source code.
+ *  This is free software, and you are welcome to redistribute it
+ *  under certain conditions; read the LICENSE file at the root of the source code for details.
+ */
 package robaertschi.environmenttech.level.item;
+
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredItem;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -8,10 +19,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.CustomModelData;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredItem;
-import net.neoforged.neoforge.registries.DeferredRegister;
+
 import robaertschi.environmenttech.level.block.ETBlocks;
 
 import static robaertschi.environmenttech.EnvironmentTech.MODID;

@@ -1,12 +1,20 @@
+/*
+ *  EnvironmentTech  Copyright (C) 2024 Robin Bärtschi
+ *  This program comes with ABSOLUTELY NO WARRANTY; for details open the file LICENSE at the root of the source code.
+ *  This is free software, and you are welcome to redistribute it
+ *  under certain conditions; read the LICENSE file at the root of the source code for details.
+ */
 package robaertschi.environmenttech.command;
 
-import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.LongArgumentType;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.chunk.ChunkAccess;
+
+import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.LongArgumentType;
+
 import robaertschi.environmenttech.data.attachments.ETAttachments;
 
 import static net.minecraft.commands.Commands.*;

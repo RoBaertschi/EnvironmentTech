@@ -1,6 +1,19 @@
+/*
+ *  EnvironmentTech  Copyright (C) 2024 Robin Bärtschi
+ *  This program comes with ABSOLUTELY NO WARRANTY; for details open the file LICENSE at the root of the source code.
+ *  This is free software, and you are welcome to redistribute it
+ *  under certain conditions; read the LICENSE file at the root of the source code for details.
+ */
 package robaertschi.environmenttech.data.recipes;
 
 import lombok.RequiredArgsConstructor;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
@@ -10,16 +23,10 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public record EnvCollectorRecipe(Ingredient input, ItemStack output, int envUsed) implements Recipe<RecipeInput> {
     @Override

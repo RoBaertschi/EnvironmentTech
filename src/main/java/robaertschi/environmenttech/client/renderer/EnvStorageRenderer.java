@@ -1,14 +1,21 @@
+/*
+ *  EnvironmentTech  Copyright (C) 2024 Robin Bärtschi
+ *  This program comes with ABSOLUTELY NO WARRANTY; for details open the file LICENSE at the root of the source code.
+ *  This is free software, and you are welcome to redistribute it
+ *  under certain conditions; read the LICENSE file at the root of the source code for details.
+ */
 package robaertschi.environmenttech.client.renderer;
+
+import java.util.List;
+import java.util.Optional;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FastColor;
+
 import robaertschi.environmenttech.data.capabilities.IEnvStorage;
 import robaertschi.environmenttech.utils.MouseUtils;
-
-import java.util.List;
-import java.util.Optional;
 
 /*
  *  BluSunrize

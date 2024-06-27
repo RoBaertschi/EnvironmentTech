@@ -1,6 +1,17 @@
+/*
+ *  EnvironmentTech  Copyright (C) 2024 Robin Bärtschi
+ *  This program comes with ABSOLUTELY NO WARRANTY; for details open the file LICENSE at the root of the source code.
+ *  This is free software, and you are welcome to redistribute it
+ *  under certain conditions; read the LICENSE file at the root of the source code for details.
+ */
 package robaertschi.environmenttech.level.block.entity;
 
 import lombok.Getter;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -8,12 +19,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
-import org.jetbrains.annotations.NotNull;
+
 import robaertschi.environmenttech.data.attachments.ETAttachments;
 import robaertschi.environmenttech.data.capabilities.EnvStorage;
 import robaertschi.environmenttech.data.capabilities.EnvType;
-
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import static robaertschi.environmenttech.EnvironmentTech.MODID;
 

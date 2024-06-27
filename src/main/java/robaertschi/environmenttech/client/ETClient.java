@@ -1,10 +1,18 @@
+/*
+ *  EnvironmentTech  Copyright (C) 2024 Robin Bärtschi
+ *  This program comes with ABSOLUTELY NO WARRANTY; for details open the file LICENSE at the root of the source code.
+ *  This is free software, and you are welcome to redistribute it
+ *  under certain conditions; read the LICENSE file at the root of the source code for details.
+ */
 package robaertschi.environmenttech.client;
 
-import net.minecraft.client.renderer.item.ItemProperties;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
+
+import net.minecraft.client.renderer.item.ItemProperties;
+
 import robaertschi.environmenttech.EnvironmentTech;
 import robaertschi.environmenttech.client.particle.EnvParticleProvider;
 import robaertschi.environmenttech.client.screen.EnvCollectorScreen;

@@ -1,22 +1,30 @@
+/*
+ *  EnvironmentTech  Copyright (C) 2024 Robin Bärtschi
+ *  This program comes with ABSOLUTELY NO WARRANTY; for details open the file LICENSE at the root of the source code.
+ *  This is free software, and you are welcome to redistribute it
+ *  under certain conditions; read the LICENSE file at the root of the source code for details.
+ */
 package robaertschi.environmenttech.compat.top;
 
+import java.util.function.Function;
+
 import mcjty.theoneprobe.api.*;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.InterModComms;
+import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
+import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.InterModComms;
-import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
-import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
+
 import robaertschi.environmenttech.EnvironmentTech;
 import robaertschi.environmenttech.client.renderer.EnvStorageRenderer;
 import robaertschi.environmenttech.data.capabilities.ETCapabilities;
 import robaertschi.environmenttech.data.capabilities.EnvType;
 import robaertschi.environmenttech.data.capabilities.IEnvStorage;
-
-import java.util.function.Function;
 
 public class TopCompat {
     public static void init(IEventBus modEventBus) {

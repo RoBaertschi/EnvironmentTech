@@ -1,4 +1,15 @@
+/*
+ *  EnvironmentTech  Copyright (C) 2024 Robin Bärtschi
+ *  This program comes with ABSOLUTELY NO WARRANTY; for details open the file LICENSE at the root of the source code.
+ *  This is free software, and you are welcome to redistribute it
+ *  under certain conditions; read the LICENSE file at the root of the source code for details.
+ */
 package robaertschi.environmenttech.datagen;
+
+import java.util.concurrent.CompletableFuture;
+
+import net.neoforged.neoforge.common.Tags;
+import org.jetbrains.annotations.NotNull;
 
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
@@ -11,13 +22,10 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.neoforge.common.Tags;
-import org.jetbrains.annotations.NotNull;
+
 import robaertschi.environmenttech.EnvironmentTech;
 import robaertschi.environmenttech.data.recipes.EnvCollectorRecipe;
 import robaertschi.environmenttech.level.item.ETItems;
-
-import java.util.concurrent.CompletableFuture;
 
 public class ETRecipeProvider extends RecipeProvider {
     public ETRecipeProvider(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pRegistries) {
