@@ -1,10 +1,10 @@
-/*
- *  EnvironmentTech  Copyright (C) 2024 Robin Bärtschi
- *  This program comes with ABSOLUTELY NO WARRANTY; for details open the file LICENSE at the root of the source code.
- *  This is free software, and you are welcome to redistribute it
- *  under certain conditions; read the LICENSE file at the root of the source code for details.
- */
 package robaertschi.environmenttech.utils;
+
+/**
+ * This file is from <a href="https://github.com/Tutorials-By-Kaupenjoe/Forge-Tutorial-1.19/">here</a>.
+ * So all credits go to Kaupenjoe. The code is under the following license: <a href="https://github.com/Tutorials-By-Kaupenjoe/Forge-Tutorial-1.19/blob/main/LICENSE">here</a>
+ * @author Kaupenjoe
+ */
 
 public class MouseUtils {
     @SuppressWarnings("unused")

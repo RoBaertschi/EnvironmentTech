@@ -10,4 +10,6 @@ Other Licenses:
             - environmenttech
                 - client
                     - renderer
-                        - EnvStorageRenderer = Blu's License of Common Sense
+                        - EnvStorageRenderer.java = Blu's License of Common Sense
+                - utils
+                    - MouseUtils.java = MIT
