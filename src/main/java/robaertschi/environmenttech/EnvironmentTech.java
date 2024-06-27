@@ -30,12 +30,13 @@ import robaertschi.environmenttech.level.block.entity.ETBlockEntities;
 import robaertschi.environmenttech.level.item.ETItems;
 import robaertschi.environmenttech.level.particle.ETParticles;
 import robaertschi.environmenttech.menu.ETMenus;
+import static robaertschi.environmenttech.ET.MODID;
 
-@Mod(EnvironmentTech.MODID)
+
+@Mod(ET.MODID)
 public class EnvironmentTech
 {
 
-    public static final String MODID = "environmenttech";
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static ResourceLocation id(String name) {
