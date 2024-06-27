@@ -65,6 +65,16 @@ public class EnvStorageRenderer {
 
     }
 
+    // Context less alternative method
+    public static void render(GuiGraphics guiGraphics, long envStored, long maxEnv, int x, int y, int width, int height) {
+        int stored = (int)(height * (envStored / (float)maxEnv));
+
+        new ContentBoxRenderer(x, y, width, height).render(guiGraphics);
+
+        guiGraphics.fillGradient(x, y + (height - stored), x + width, y + height,
+                from, to);
+    }
+
     public void renderTooltip(GuiGraphics guiGraphics, int mouseX, int mouseY, int leftPos, int topPos, Font font) {
         if (isMouseAboveArea(mouseX, mouseY, x, y)) {
             guiGraphics.renderTooltip(font, getTooltips(), Optional.empty(), mouseX - leftPos, mouseY - topPos);

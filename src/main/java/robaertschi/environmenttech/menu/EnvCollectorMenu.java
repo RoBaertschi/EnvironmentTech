@@ -32,7 +32,10 @@ public class EnvCollectorMenu extends AbstractContainerMenu {
         this.data = data;
         addSlot(new SlotItemHandler(blockEntity.getInputInventory(), 0, 54, 34));
         addSlot(new SlotItemHandler(blockEntity.getOutputInventory(), 0, 116, 35));
+
+
         layoutPlayerInventorySlots(player.getInventory(), 8, 84);
+
 
         addDataSlots(data);
     }

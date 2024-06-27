@@ -11,7 +11,7 @@ import robaertschi.environmenttech.client.renderer.EnvStorageRenderer;
 import robaertschi.environmenttech.menu.EnvCollectorMenu;
 
 public class EnvCollectorScreen extends AbstractContainerScreen<EnvCollectorMenu> {
-    private final ResourceLocation GUI = EnvironmentTech.id("textures/gui/container/env_collector.png");
+    public static final ResourceLocation GUI = EnvironmentTech.id("textures/gui/container/env_collector.png");
     private EnvStorageRenderer storageRenderer;
 
     public EnvCollectorScreen(EnvCollectorMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
