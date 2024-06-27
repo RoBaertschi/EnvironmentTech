@@ -1,0 +1,13 @@
+All of the code in the current repository is licensed under the LGPL-3.0, see LICENSE for more details,
+with the exception of the src/main/resources/assets folder which goes by the CC-4.0-BY-NC-SA which you can find in LICENSE.assets.
+
+Some code might have a different license, if this is true, then there will be a copyright notice in the file.
+
+Other Licenses:
+- src
+    - main
+        - robaertschi
+            - environmenttech
+                - client
+                    - renderer
+                        - EnvStorageRenderer = Blu's License of Common Sense
