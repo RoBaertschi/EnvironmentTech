@@ -68,8 +68,6 @@ public class EnvCollectorRecipeCategory implements IRecipeCategory<RecipeHolder<
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<EnvCollectorRecipe> recipeHolder, IFocusGroup focuses) {
-//54, 34))
-// 116, 35
         EnvCollectorRecipe recipe = recipeHolder.value();
 
         builder.addSlot(RecipeIngredientRole.INPUT, 6, 16).addIngredients(recipe.input());

@@ -29,7 +29,7 @@ public class ETItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         withExistingParent(ETBlocks.ENV_COLLECTOR_BLOCK.getId().getPath(), modLoc("block/" + "env_collector"));
-//        withExistingParent(ETBlocks.ENV_DISTRIBUTOR_BLOCK.getId().getPath(), modLoc("block/" + "env_distributor"));
+        withExistingParent(ETBlocks.ENV_DISTRIBUTOR_BLOCK.getId().getPath(), modLoc("block/" + "env_distributor"));
         basicItem(ETItems.ENVIRONMENTAL_ESSENCE_ITEM.get());
         basicItem(ETItems.GLASS_TANK.get());
         registerEnvDetector();
