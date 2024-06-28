@@ -1,7 +1,11 @@
+/*
+ *  EnvironmentTech  Copyright (C) 2024 Robin B??rtschi
+ *  This program comes with ABSOLUTELY NO WARRANTY; for details open the file LICENSE at the root of the source code.
+ *  This is free software, and you are welcome to redistribute it
+ *  under certain conditions; read the LICENSE file at the root of the source code for details.
+ */
 package robaertschi.environmenttech;
 
-import com.mojang.logging.LogUtils;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -11,6 +15,11 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import org.slf4j.Logger;
+
+import net.minecraft.resources.ResourceLocation;
+
+import com.mojang.logging.LogUtils;
+
 import robaertschi.environmenttech.command.EnvironmenttechCommand;
 import robaertschi.environmenttech.data.attachments.ETAttachments;
 import robaertschi.environmenttech.data.capabilities.ETCapabilities;

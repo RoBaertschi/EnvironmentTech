@@ -1,7 +1,18 @@
+/*
+ *  EnvironmentTech  Copyright (C) 2024 Robin B??rtschi
+ *  This program comes with ABSOLUTELY NO WARRANTY; for details open the file LICENSE at the root of the source code.
+ *  This is free software, and you are welcome to redistribute it
+ *  under certain conditions; read the LICENSE file at the root of the source code for details.
+ */
 package robaertschi.environmenttech.level.block;
 
-import com.mojang.serialization.MapCodec;
 import lombok.extern.slf4j.Slf4j;
+
+import javax.annotation.ParametersAreNonnullByDefault;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -16,12 +27,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import com.mojang.serialization.MapCodec;
+
 import robaertschi.environmenttech.level.block.entity.ETBlockEntities;
 import robaertschi.environmenttech.level.block.entity.EnvDistributorBlockEntity;
-
-import javax.annotation.ParametersAreNonnullByDefault;
 
 @SuppressWarnings("deprecation")
 @Slf4j
