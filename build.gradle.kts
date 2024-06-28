@@ -7,6 +7,7 @@ plugins {
     `maven-publish`
     id("io.freefair.lombok") version "8.6"
     id ("net.neoforged.gradle.userdev") version ("7.0.142")
+    id("com.diffplug.spotless") version "7.0.0.BETA1"
 }
 
 val minecraftVersion: String by project
@@ -50,6 +51,21 @@ base {
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
+spotless {
+    format("misc") {
+        target("*.gradle.kts", ".gitattributes", ".gitignore")
+
+        trimTrailingWhitespace()
+        indentWithTabs()
+        endWithNewline()
+    }
+
+    java {
+        importOrder("lombok", "java|javax", "", "net.minecraft", "com.mojang", "robaertschi", "\\#")
+        removeUnusedImports()
+        licenseHeaderFile("HEADER.java")
+    }
+}
 
 
 sourceSets {
