@@ -13,7 +13,7 @@ import net.neoforged.neoforge.client.event.*;
 
 import net.minecraft.client.renderer.item.ItemProperties;
 
-import robaertschi.environmenttech.EnvironmentTech;
+import robaertschi.environmenttech.ET;
 import robaertschi.environmenttech.client.particle.EnvParticleProvider;
 import robaertschi.environmenttech.client.screen.EnvCollectorScreen;
 import robaertschi.environmenttech.data.components.ETComponents;
@@ -31,7 +31,7 @@ public class ETClient {
     public static void clientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> ItemProperties.register(
                 ETItems.ENV_DETECTOR_ITEM.get(),
-                EnvironmentTech.id("filled"),
+                ET.id("filled"),
                 (pStack, pLevel, pEntity, pSeed) ->  pStack.getOrDefault(ETComponents.FILLED_COMPONENT, new FilledComponent(0)).filled()
         ));
     }

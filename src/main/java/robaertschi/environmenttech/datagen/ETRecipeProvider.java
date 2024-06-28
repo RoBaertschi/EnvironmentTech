@@ -23,7 +23,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 
-import robaertschi.environmenttech.EnvironmentTech;
+import robaertschi.environmenttech.ET;
 import robaertschi.environmenttech.data.recipes.EnvCollectorRecipe;
 import robaertschi.environmenttech.level.item.ETItems;
 
@@ -52,7 +52,7 @@ public class ETRecipeProvider extends RecipeProvider {
                 .pattern("ggg")
                 .unlockedBy("iron_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(Tags.Items.INGOTS_IRON).build()))
                 .unlockedBy("glass_pain", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(Tags.Items.GLASS_PANES).build()))
-                .save(recipeOutput, EnvironmentTech.id("glass_tank"));
+                .save(recipeOutput, ET.id("glass_tank"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ETItems.ENV_COLLECTOR_BLOCK_ITEM)
                 .define('p', Items.OAK_PLANKS)
@@ -64,7 +64,7 @@ public class ETRecipeProvider extends RecipeProvider {
                 .unlockedBy("oak_plank", InventoryChangeTrigger.TriggerInstance.hasItems(Items.OAK_PLANKS))
                 .unlockedBy("oak_log", InventoryChangeTrigger.TriggerInstance.hasItems(Items.OAK_LOG))
                 .unlockedBy("hopper", InventoryChangeTrigger.TriggerInstance.hasItems(Items.HOPPER))
-                .save(recipeOutput, EnvironmentTech.id("env_collector_block_item"));
+                .save(recipeOutput, ET.id("env_collector_block_item"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ETItems.ENV_DETECTOR_ITEM)
                 .define('t', ETItems.GLASS_TANK)
@@ -76,6 +76,6 @@ public class ETRecipeProvider extends RecipeProvider {
                 .unlockedBy("glass_tank", InventoryChangeTrigger.TriggerInstance.hasItems(ETItems.GLASS_TANK))
                 .unlockedBy("hopper", InventoryChangeTrigger.TriggerInstance.hasItems(Items.HOPPER))
                 .unlockedBy("stick", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(Tags.Items.RODS_WOODEN).build()))
-                .save(recipeOutput, EnvironmentTech.id("env_detector_item"));
+                .save(recipeOutput, ET.id("env_detector_item"));
     }
 }

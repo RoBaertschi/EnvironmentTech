@@ -14,7 +14,7 @@ import net.minecraft.data.PackOutput;
 
 import robaertschi.environmenttech.level.block.ETBlocks;
 
-import static robaertschi.environmenttech.EnvironmentTech.MODID;
+import static robaertschi.environmenttech.ET.MODID;
 
 public class ETBlockStateProvider extends BlockStateProvider {
     public ETBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {

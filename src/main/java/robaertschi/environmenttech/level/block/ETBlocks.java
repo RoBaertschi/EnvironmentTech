@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
-import static robaertschi.environmenttech.EnvironmentTech.MODID;
+import static robaertschi.environmenttech.ET.MODID;
 
 public class ETBlocks {
     // Create a Deferred Register to hold Blocks which will all be registered under the "environmenttech" namespace

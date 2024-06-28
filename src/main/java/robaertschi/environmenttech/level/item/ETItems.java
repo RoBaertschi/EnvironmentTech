@@ -22,7 +22,7 @@ import net.minecraft.world.item.component.CustomModelData;
 
 import robaertschi.environmenttech.level.block.ETBlocks;
 
-import static robaertschi.environmenttech.EnvironmentTech.MODID;
+import static robaertschi.environmenttech.ET.MODID;
 
 public class ETItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);

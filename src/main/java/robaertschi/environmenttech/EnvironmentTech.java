@@ -15,8 +15,6 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import org.slf4j.Logger;
 
-import net.minecraft.resources.ResourceLocation;
-
 import com.mojang.logging.LogUtils;
 
 import robaertschi.environmenttech.command.EnvironmenttechCommand;
@@ -30,18 +28,15 @@ import robaertschi.environmenttech.level.block.entity.ETBlockEntities;
 import robaertschi.environmenttech.level.item.ETItems;
 import robaertschi.environmenttech.level.particle.ETParticles;
 import robaertschi.environmenttech.menu.ETMenus;
+
 import static robaertschi.environmenttech.ET.MODID;
 
 
-@Mod(ET.MODID)
+@Mod(MODID)
 public class EnvironmentTech
 {
 
     public static final Logger LOGGER = LogUtils.getLogger();
-
-    public static ResourceLocation id(String name) {
-        return ResourceLocation.fromNamespaceAndPath(MODID, name);
-    }
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.

@@ -24,7 +24,7 @@ import robaertschi.environmenttech.data.attachments.ETAttachments;
 import robaertschi.environmenttech.data.capabilities.EnvStorage;
 import robaertschi.environmenttech.data.capabilities.EnvType;
 
-import static robaertschi.environmenttech.EnvironmentTech.MODID;
+import static robaertschi.environmenttech.ET.MODID;
 
 @Getter
 @ParametersAreNonnullByDefault

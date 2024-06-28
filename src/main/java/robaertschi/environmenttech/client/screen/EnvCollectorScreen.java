@@ -14,12 +14,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-import robaertschi.environmenttech.EnvironmentTech;
+import robaertschi.environmenttech.ET;
 import robaertschi.environmenttech.client.renderer.EnvStorageRenderer;
 import robaertschi.environmenttech.menu.EnvCollectorMenu;
 
 public class EnvCollectorScreen extends AbstractContainerScreen<EnvCollectorMenu> {
-    public static final ResourceLocation GUI = EnvironmentTech.id("textures/gui/container/env_collector.png");
+    public static final ResourceLocation GUI = ET.id("textures/gui/container/env_collector.png");
     private EnvStorageRenderer storageRenderer;
 
     public EnvCollectorScreen(EnvCollectorMenu pMenu, Inventory pPlayerInventory, Component pTitle) {

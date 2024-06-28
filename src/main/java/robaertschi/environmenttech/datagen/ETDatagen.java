@@ -17,7 +17,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 
-import static robaertschi.environmenttech.EnvironmentTech.MODID;
+import static robaertschi.environmenttech.ET.MODID;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD, modid = MODID)
 public class ETDatagen {

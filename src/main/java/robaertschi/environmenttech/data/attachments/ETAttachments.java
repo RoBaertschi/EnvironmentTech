@@ -15,10 +15,10 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import com.mojang.serialization.Codec;
 
-import robaertschi.environmenttech.EnvironmentTech;
+import static robaertschi.environmenttech.ET.MODID;
 
 public class ETAttachments {
-    private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, EnvironmentTech.MODID);
+    private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MODID);
 
     public static final Supplier<AttachmentType<Long>> ENV = ATTACHMENT_TYPES.register(
             "env", () -> AttachmentType.builder(() -> 0L).serialize(Codec.LONG).build()

@@ -22,7 +22,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 
-import robaertschi.environmenttech.EnvironmentTech;
+import robaertschi.environmenttech.ET;
 import robaertschi.environmenttech.data.recipes.ETRecipes;
 import robaertschi.environmenttech.level.block.ETBlocks;
 import robaertschi.environmenttech.level.block.entity.EnvCollectorBlockEntity;
@@ -35,7 +35,7 @@ import robaertschi.environmenttech.menu.EnvCollectorMenu;
 public class JeiCompatPlugin implements IModPlugin {
     @Override
     public @NotNull ResourceLocation getPluginUid() {
-        return EnvironmentTech.id("jei_default");
+        return ET.id("jei_default");
     }
 
     @Override

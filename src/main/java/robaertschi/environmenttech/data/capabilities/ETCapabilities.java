@@ -13,12 +13,12 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 
 import net.minecraft.core.Direction;
 
-import robaertschi.environmenttech.EnvironmentTech;
+import robaertschi.environmenttech.ET;
 import robaertschi.environmenttech.level.block.entity.ETBlockEntities;
 
 public class ETCapabilities {
     public static final BlockCapability<IEnvStorage, EnvType> ENV_STORAGE_BLOCK =
-            BlockCapability.create(EnvironmentTech.id("env_storage"),
+            BlockCapability.create(ET.id("env_storage"),
                     IEnvStorage.class,
                     EnvType.class
                     );

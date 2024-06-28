@@ -20,6 +20,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
+import robaertschi.environmenttech.ET;
 import robaertschi.environmenttech.EnvironmentTech;
 import robaertschi.environmenttech.client.renderer.EnvStorageRenderer;
 import robaertschi.environmenttech.data.capabilities.ETCapabilities;
@@ -47,7 +48,7 @@ public class TopCompat {
 
                 @Override
                 public ResourceLocation getID() {
-                    return EnvironmentTech.id("default");
+                    return ET.id("default");
                 }
 
                 @Override

@@ -14,12 +14,12 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 
-import robaertschi.environmenttech.EnvironmentTech;
+import robaertschi.environmenttech.ET;
 import robaertschi.environmenttech.level.block.ETBlocks;
 import robaertschi.environmenttech.level.item.ETItems;
 import robaertschi.environmenttech.level.item.EnvDetectorItem;
 
-import static robaertschi.environmenttech.EnvironmentTech.MODID;
+import static robaertschi.environmenttech.ET.MODID;
 
 public class ETItemModelProvider extends ItemModelProvider {
     public ETItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -44,7 +44,7 @@ public class ETItemModelProvider extends ItemModelProvider {
             ItemModelBuilder sub_item_builder = getBuilder("env_detector_" + i);
             sub_item_builder.parent(new ModelFile.ExistingModelFile(ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated"), existingFileHelper));
             sub_item_builder.texture("layer0", modLoc("item/env_detector_" + i));
-            builder.override().predicate(EnvironmentTech.id("filled"), i).model(sub_item_builder);
+            builder.override().predicate(ET.id("filled"), i).model(sub_item_builder);
         }
     }
 

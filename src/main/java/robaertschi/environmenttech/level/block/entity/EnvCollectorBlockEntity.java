@@ -49,7 +49,8 @@ import robaertschi.environmenttech.data.recipes.ETRecipes;
 import robaertschi.environmenttech.data.recipes.EnvCollectorRecipe;
 import robaertschi.environmenttech.menu.EnvCollectorMenu;
 
-import static robaertschi.environmenttech.EnvironmentTech.MODID;
+import static robaertschi.environmenttech.ET.MODID;
+
 
 public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider, ITickableBlockEntity, TOPInfoProvider {
     public static final int SLOT_INPUT = 0;

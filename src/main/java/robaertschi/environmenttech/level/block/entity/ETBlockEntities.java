@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import robaertschi.environmenttech.level.block.ETBlocks;
 
-import static robaertschi.environmenttech.EnvironmentTech.MODID;
+import static robaertschi.environmenttech.ET.MODID;
 
 @SuppressWarnings("DataFlowIssue")
 public class ETBlockEntities {

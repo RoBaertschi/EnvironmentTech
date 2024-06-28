@@ -16,10 +16,10 @@ import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.status.ChunkStatus;
 
 import robaertschi.environmenttech.Config;
-import robaertschi.environmenttech.EnvironmentTech;
+import robaertschi.environmenttech.ET;
 import robaertschi.environmenttech.data.attachments.ETAttachments;
 
-@EventBusSubscriber(modid = EnvironmentTech.MODID)
+@EventBusSubscriber(modid = ET.MODID)
 @Slf4j(topic = "EnvironmentTech/ChunkData")
 public class ETChunkEvents {
     @SubscribeEvent()
