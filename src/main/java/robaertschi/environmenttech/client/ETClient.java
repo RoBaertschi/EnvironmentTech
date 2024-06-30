@@ -20,6 +20,7 @@ import robaertschi.environmenttech.data.components.ETComponents;
 import robaertschi.environmenttech.data.components.FilledComponent;
 import robaertschi.environmenttech.level.block.entity.ETBlockEntities;
 import robaertschi.environmenttech.level.block.entity.renderer.EnvCollectorRenderer;
+import robaertschi.environmenttech.level.block.entity.renderer.EnvDistributorRenderer;
 import robaertschi.environmenttech.level.item.ETItems;
 import robaertschi.environmenttech.level.particle.ETParticles;
 import robaertschi.environmenttech.menu.ETMenus;
@@ -44,6 +45,7 @@ public class ETClient {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(ETBlockEntities.ENV_COLLECTOR_BLOCK_ENTITY.get(), EnvCollectorRenderer::new);
+        event.registerBlockEntityRenderer(ETBlockEntities.ENV_DISTRIBUTOR_BLOCK_ENTITY.get(), EnvDistributorRenderer::new);
     }
 
     @SubscribeEvent

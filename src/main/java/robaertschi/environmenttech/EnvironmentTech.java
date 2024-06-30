@@ -25,6 +25,8 @@ import robaertschi.environmenttech.data.components.ETComponents;
 import robaertschi.environmenttech.data.recipes.ETRecipes;
 import robaertschi.environmenttech.level.block.ETBlocks;
 import robaertschi.environmenttech.level.block.entity.ETBlockEntities;
+import robaertschi.environmenttech.level.fluid.ETFluidTypes;
+import robaertschi.environmenttech.level.fluid.ETFluids;
 import robaertschi.environmenttech.level.item.ETItems;
 import robaertschi.environmenttech.level.particle.ETParticles;
 import robaertschi.environmenttech.menu.ETMenus;
@@ -54,6 +56,8 @@ public class EnvironmentTech
         ETMenus.init(modEventBus);
         ETParticles.init(modEventBus);
         ETComponents.init(modEventBus);
+        ETFluids.init(modEventBus);
+        ETFluidTypes.init(modEventBus);
         ETCompat.init(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);

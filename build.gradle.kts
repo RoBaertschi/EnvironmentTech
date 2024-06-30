@@ -6,7 +6,7 @@ plugins {
 	idea
 	`maven-publish`
 	id("io.freefair.lombok") version "8.6"
-	id ("net.neoforged.gradle.userdev") version ("7.0.151")
+	id ("net.neoforged.gradle.userdev") version ("7.0.152")
 	id("com.diffplug.spotless") version "7.0.0.BETA1"
 }
 
