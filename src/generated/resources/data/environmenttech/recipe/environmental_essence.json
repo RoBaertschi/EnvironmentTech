@@ -1,6 +1,7 @@
 {
   "type": "environmenttech:env_collector",
   "envUsed": 10,
+  "id": "environmenttech:environmental_essence",
   "ingredient": {
     "item": "minecraft:iron_ingot"
   },

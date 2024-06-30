@@ -32,7 +32,15 @@ val jeiVersion: String by project
 val jeiMcVersion: String by project
 val emiVersion: String by project
 
+enum class RecipeViewer {
+	None,
+	JEI,
+	EMI,
+	REI
+}
+
 val withTop = true
+val recipeViewer: RecipeViewer = RecipeViewer.EMI
 
 version = modVersion
 group = modGroupId
@@ -181,14 +189,29 @@ dependencies {
 	implementation ("net.neoforged:neoforge:${neoVersion}")
 
 	compileOnly("mcjty.theoneprobe:theoneprobe:${topVersion}")
-	if (withTop)
+	if (withTop) {
 		runtimeOnly("mcjty.theoneprobe:theoneprobe:${topVersion}")
-//    compileOnly("dev.emi:emi-neoforge:${emiVersion}:api")
-//    runtimeOnly("dev.emi:emi-neoforge:${emiVersion}")
-//    runtimeOnly("me.shedaniel:RoughlyEnoughItems-neoforge:${reiVersion}")
-//    compileOnly("me.shedaniel:RoughlyEnoughItems-api-neoforge:${reiVersion}")
-//    compileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-neoforge:${reiVersion}")
+	}
 
+	when (recipeViewer) {
+		RecipeViewer.None -> {}
+		RecipeViewer.JEI -> {
+			runtimeOnly("mezz.jei:jei-${jeiMcVersion}-neoforge:${jeiVersion}")
+		}
+		RecipeViewer.EMI -> {
+			runtimeOnly("dev.emi:emi-neoforge:${emiVersion}")
+		}
+		RecipeViewer.REI -> {
+			runtimeOnly("me.shedaniel:RoughlyEnoughItems-neoforge:${reiVersion}")
+			compileOnly("me.shedaniel:RoughlyEnoughItems-api-neoforge:${reiVersion}")
+			compileOnly("me.shedaniel:RoughlyEnoughItems-default-plugin-neoforge:${reiVersion}")
+		}
+	}
+
+	// API's
+	compileOnly("mezz.jei:jei-${jeiMcVersion}-common-api:${jeiVersion}")
+	compileOnly("mezz.jei:jei-${jeiMcVersion}-neoforge-api:${jeiVersion}")
+	compileOnly("dev.emi:emi-neoforge:${emiVersion}:api")
 
 	// Testing
 	junitImplementation(platform("org.junit:junit-bom:${junitVersion}"))
@@ -199,9 +222,6 @@ dependencies {
 
 	// Example mod dependency with JEI
 	// The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
-	compileOnly("mezz.jei:jei-${jeiMcVersion}-common-api:${jeiVersion}")
-	compileOnly("mezz.jei:jei-${jeiMcVersion}-neoforge-api:${jeiVersion}")
-	runtimeOnly("mezz.jei:jei-${jeiMcVersion}-neoforge:${jeiVersion}")
 
 	// Example mod dependency using a mod jar from ./libs with a flat dir repository
 	// This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar

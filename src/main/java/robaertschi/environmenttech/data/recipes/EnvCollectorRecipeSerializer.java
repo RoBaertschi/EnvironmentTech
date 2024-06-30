@@ -6,6 +6,7 @@
  */
 package robaertschi.environmenttech.data.recipes;
 
+import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -21,6 +22,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 public class EnvCollectorRecipeSerializer implements RecipeSerializer<EnvCollectorRecipe> {
     public static final MapCodec<EnvCollectorRecipe> CODEC = RecordCodecBuilder.mapCodec(
             envCollectorRecipeInstance -> envCollectorRecipeInstance.group(
+                    ResourceLocation.CODEC.fieldOf("id").forGetter(EnvCollectorRecipe::id),
                     Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(EnvCollectorRecipe::input),
                     ItemStack.CODEC.fieldOf("output").forGetter(EnvCollectorRecipe::output),
                     Codec.INT.fieldOf("envUsed").forGetter(EnvCollectorRecipe::envUsed)
@@ -39,13 +41,15 @@ public class EnvCollectorRecipeSerializer implements RecipeSerializer<EnvCollect
     }
 
     private EnvCollectorRecipe fromNetwork(RegistryFriendlyByteBuf byteBuf) {
+        ResourceLocation id = ResourceLocation.STREAM_CODEC.decode(byteBuf);
         Ingredient ingredient = Ingredient.CONTENTS_STREAM_CODEC.decode(byteBuf);
         ItemStack itemStack = ItemStack.STREAM_CODEC.decode(byteBuf);
         int envUsed = byteBuf.readInt();
-        return new EnvCollectorRecipe(ingredient, itemStack, envUsed);
+        return new EnvCollectorRecipe(id, ingredient, itemStack, envUsed);
     }
 
     private void toNetwork(RegistryFriendlyByteBuf byteBuf, EnvCollectorRecipe recipe) {
+        ResourceLocation.STREAM_CODEC.encode(byteBuf, recipe.id());
         Ingredient.CONTENTS_STREAM_CODEC.encode(byteBuf, recipe.input());
         ItemStack.STREAM_CODEC.encode(byteBuf, recipe.output());
         byteBuf.writeInt(recipe.envUsed());

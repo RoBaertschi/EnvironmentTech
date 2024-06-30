@@ -28,7 +28,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
-public record EnvCollectorRecipe(Ingredient input, ItemStack output, int envUsed) implements Recipe<RecipeInput> {
+public record EnvCollectorRecipe(ResourceLocation id, Ingredient input, ItemStack output, int envUsed) implements Recipe<RecipeInput> {
     @Override
     public boolean matches(@NotNull RecipeInput pContainer, @NotNull Level pLevel) {
         return this.input.test(pContainer.getItem(0));
@@ -99,7 +99,7 @@ public record EnvCollectorRecipe(Ingredient input, ItemStack output, int envUsed
 
             this.criteria.forEach(advancementBuilder::addCriterion);
 
-            EnvCollectorRecipe envCollectorRecipe = new EnvCollectorRecipe(this.ingredient,  this.output, this.envUsed);
+            EnvCollectorRecipe envCollectorRecipe = new EnvCollectorRecipe(pId, this.ingredient,  this.output, this.envUsed);
 
             pRecipeOutput.accept(pId, envCollectorRecipe, advancementBuilder.build(pId.withPrefix("recipes/")));
         }
