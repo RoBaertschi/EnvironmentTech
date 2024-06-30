@@ -11,11 +11,16 @@ import lombok.Getter;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.ChunkAccess;
@@ -30,6 +35,11 @@ import static robaertschi.environmenttech.ET.MODID;
 @ParametersAreNonnullByDefault
 public class EnvDistributorBlockEntity extends BlockEntity implements ITickableBlockEntity {
 
+    public static final int TICKS_PER_PROCESS_TICK = 20; // 1 Minute
+    public static final int REDUCE_PER_PROCESS_TICK = 5;
+
+    private int ticksBetweenProcessTick = 0;
+
     public static final String ENV_TAG = "Env";
     private final EnvStorage envStorage = new EnvStorage(EnvType.Chunk, 64) {
         @Override
@@ -37,7 +47,15 @@ public class EnvDistributorBlockEntity extends BlockEntity implements ITickableB
             EnvDistributorBlockEntity.this.setChanged();
             assert level != null;
             if (!level.isClientSide()) {
-                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Block.UPDATE_ALL);
+            }
+        }
+
+        @Override
+        public void setEnvStored(long env) {
+            super.setEnvStored(env);
+            if (level != null && !level.isClientSide()) {
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), Block.UPDATE_ALL);
             }
         }
     };
@@ -63,11 +81,39 @@ public class EnvDistributorBlockEntity extends BlockEntity implements ITickableB
 
     @Override
     public void serverTick(ServerLevel level, BlockPos blockPos, BlockState blockState) {
-        if (envStorage.getEnvStored() > 0) {
-            ChunkAccess chunk = level.getChunk(blockPos);
-            long value = Math.min(5, envStorage.getEnvStored());
-            chunk.setData(ETAttachments.ENV, chunk.getData(ETAttachments.ENV) + value);
-            envStorage.setEnvStored(envStorage.getEnvStored() - value);
+
+        if (ticksBetweenProcessTick < TICKS_PER_PROCESS_TICK) {
+            ticksBetweenProcessTick++;
+            return;
+        } else {
+            ticksBetweenProcessTick = 0;
         }
+
+        if (envStorage.getEnvStored() > 0) {
+            // ES = 1
+            long amount = REDUCE_PER_PROCESS_TICK;
+            // 1 - 5 = -4
+            long result = envStorage.getEnvStored() - amount;
+
+            if ( result < 0 ) {
+                // -4 + 5 = 1
+                amount = result + amount;
+            }
+
+            ChunkAccess chunk = level.getChunk(blockPos);
+            chunk.setData(ETAttachments.ENV, chunk.getData(ETAttachments.ENV) + amount);
+            envStorage.setEnvStored(envStorage.getEnvStored() - amount);
+        }
+    }
+
+    @Nullable
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public @NotNull CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        return saveWithoutMetadata(registries);
     }
 }

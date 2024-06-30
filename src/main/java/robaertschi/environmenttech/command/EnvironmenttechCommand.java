@@ -6,7 +6,11 @@
  */
 package robaertschi.environmenttech.command;
 
+import net.neoforged.neoforge.server.command.EnumArgument;
+
 import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
+import net.minecraft.commands.arguments.coordinates.WorldCoordinates;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -16,6 +20,8 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.LongArgumentType;
 
 import robaertschi.environmenttech.data.attachments.ETAttachments;
+import robaertschi.environmenttech.data.capabilities.ETCapabilities;
+import robaertschi.environmenttech.data.capabilities.EnvType;
 
 import static net.minecraft.commands.Commands.*;
 
@@ -48,6 +54,19 @@ public class EnvironmenttechCommand {
 
                             return 1;
                         }))
+                        .then(literal("set_env").then(argument("pos", BlockPosArgument.blockPos()).then(argument("env_type", EnumArgument.enumArgument(EnvType.class)).then(argument("amount", LongArgumentType.longArg(0)).executes(
+                                context -> {
+                                    WorldCoordinates pos = context.getArgument("pos", WorldCoordinates.class);
+                                    EnvType type = context.getArgument("env_type", EnvType.class);
+                                    long amount = context.getArgument("amount", Long.class);
+                                    var cap = context.getSource().getPlayerOrException().level().getCapability(ETCapabilities.ENV_STORAGE_BLOCK, pos.getBlockPos(context.getSource()), type);
+                                    if (cap != null) {
+                                        cap.receiveEnv(amount, false);
+                                    }
+
+                                    return 1;
+                                }
+                        )))))
         );
     }
 }

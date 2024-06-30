@@ -7,17 +7,22 @@ import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidStack;
 import org.joml.Vector3f;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+/**
+ * This file is from <a href="https://github.com/DaRealTurtyWurty/DynamicFluidTanks/blob/forge/src/main/java/dev/turtywurty/dynamicfluidtanks/client/renderer/FluidTankBERenderer.java">here</a>.
+ * So all credits go to TurtyWurty. The code is under the LGPL-3.0, the conformation you can see <a href="https://github.com/DaRealTurtyWurty/DynamicFluidTanks/blob/forge/gradle.properties">here</a> on the mod_license line.
+ * But the repo does not contain a LICENSE file, so it is not clear.
+ * @author TurtyWurty
+ */
 public class RenderUtils {
+
     public static void vertex(VertexConsumer consumer,
                               PoseStack stack,
                               float x, float y, float z,
@@ -61,13 +66,11 @@ public class RenderUtils {
     public static void cuboid(
             VertexConsumer consumer,
             PoseStack stack,
-            BlockPos fromPos,
             Vector3f start, Vector3f end,
             TextureAtlasSprite sprite,
             int packedLight, int color
 
     ) {
-        var relativeStart = Vec3.atLowerCornerWithOffset(fromPos, -start.x(), -start.y(), -start.z());
 
         float width = end.x() - start.x();
         float height = end.y() - start.y();
@@ -79,7 +82,12 @@ public class RenderUtils {
         float v1 = sprite.getV1();
 
         stack.pushPose();
-        stack.translate(-relativeStart.x(), -relativeStart.y(), -relativeStart.z());
+//        log.info("x: {}, y: {}, z: {}", -relativeStart.x(), -relativeStart.y(), -relativeStart.z());
+//        stack.translate(-relativeStart.x(), -relativeStart.y(), -relativeStart.z());
+//        stack.translate(relativeStart.x(), relativeStart.y(), relativeStart.z());
+
+//        System.out.println("Width " + width + " height " + height + " depth " + depth);
+//        System.out.println("start " + start + " end " + end + " relativeStart " + relativeStart);
 
         // Front
         quad(consumer, stack, packedLight, color, 0, 0, 0, width, height, 0, u0, v0, u1, v1);
@@ -112,15 +120,15 @@ public class RenderUtils {
                                       long amount,
                                       long capacity,
                                       Vector3f start,
-                                      Vector3f end,
-                                      BlockPos blockPos
+                                      Vector3f end
     ) {
         TextureAtlasSprite sprite = Minecraft.getInstance().getTextureAtlas(InventoryMenu.BLOCK_ATLAS).apply(stillTexture);
         VertexConsumer consumer = bufferSource.getBuffer(renderType);
         float percent = ((float) amount / (float) capacity);
-        end.y = start.y() + (percent * (end.y() - start.y()));
+        float newY = start.y() + (percent * (end.y() - start.y()));
+        Vector3f newEnd = new Vector3f(end.x(), newY, end.z());
 
-        cuboid(consumer, poseStack, blockPos, start, end, sprite, packedLight, tintColor);
+        cuboid(consumer, poseStack, start, newEnd, sprite, packedLight, tintColor);
     }
 
     public static void renderFluidBox(FluidStack fluidStack,
@@ -130,15 +138,14 @@ public class RenderUtils {
                                       long amount,
                                       long capacity,
                                       Vector3f start,
-                                      Vector3f end,
-                                      BlockPos blockPos
+                                      Vector3f end
                                       ) {
         IClientFluidTypeExtensions extensions = IClientFluidTypeExtensions.of(fluidStack.getFluid());
         ResourceLocation stillTexture = extensions.getStillTexture();
         int tintColor = extensions.getTintColor(fluidStack);
         RenderType renderType = ItemBlockRenderTypes.getRenderLayer(fluidStack.getFluid().defaultFluidState());
         renderFluidBox(
-                stack, bufferSource, packedLight, renderType, stillTexture, tintColor, amount, capacity, start, end, blockPos
+                stack, bufferSource, packedLight, renderType, stillTexture, tintColor, amount, capacity, start, end
         );
     }
 }

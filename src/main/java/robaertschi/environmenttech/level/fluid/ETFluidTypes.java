@@ -1,17 +1,25 @@
+/*
+ *  EnvironmentTech  Copyright (C) 2024 Robin Bärtschi
+ *  This program comes with ABSOLUTELY NO WARRANTY; for details open the file LICENSE at the root of the source code.
+ *  This is free software, and you are welcome to redistribute it
+ *  under certain conditions; read the LICENSE file at the root of the source code for details.
+ */
 package robaertschi.environmenttech.level.fluid;
 
-import net.minecraft.MethodsReturnNonnullByDefault;
-import net.minecraft.resources.ResourceLocation;
+import java.util.function.Consumer;
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
-import robaertschi.environmenttech.client.renderer.EnvStorageRenderer;
 
-import javax.annotation.ParametersAreNonnullByDefault;
-import java.util.function.Consumer;
+import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.resources.ResourceLocation;
+
+import robaertschi.environmenttech.client.renderer.EnvStorageRenderer;
 
 import static robaertschi.environmenttech.ET.MODID;
 

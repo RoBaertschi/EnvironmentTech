@@ -11,5 +11,6 @@ Other Licenses:
                 - client
                     - renderer
                         - EnvStorageRenderer.java = Blu's License of Common Sense
+                    - RenderUtils.java = LGPL-3.0
                 - utils
                     - MouseUtils.java = MIT
