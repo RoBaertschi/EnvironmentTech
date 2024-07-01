@@ -31,6 +31,8 @@ val reiVersion: String by project
 val jeiVersion: String by project
 val jeiMcVersion: String by project
 val emiVersion: String by project
+val modonomiconVersion: String by project
+val commonmarkVersion: String by project
 
 enum class RecipeViewer {
 	None,
@@ -66,6 +68,13 @@ repositories {
 	maven {
 		url = URI.create("https://maven.terraformersmc.com/")
 		name = "TerraformersMC"
+	}
+	maven {
+		url = URI.create("https://dl.cloudsmith.io/public/klikli-dev/mods/maven/")
+		name = "Klikli's Maven"
+		content {
+			includeGroup("com.klikli_dev")
+		}
 	}
 }
 
@@ -185,6 +194,18 @@ runs {
 
 }
 
+val libraries: Configuration = configurations.create("libraries")
+
+
+configurations {
+	implementation {
+		extendsFrom(libraries)
+	}
+	runtimeClasspath {
+		extendsFrom(localRuntime.get())
+	}
+}
+
 dependencies {
 	implementation ("net.neoforged:neoforge:${neoVersion}")
 
@@ -212,6 +233,16 @@ dependencies {
 	compileOnly("mezz.jei:jei-${jeiMcVersion}-common-api:${jeiVersion}")
 	compileOnly("mezz.jei:jei-${jeiMcVersion}-neoforge-api:${jeiVersion}")
 	compileOnly("dev.emi:emi-neoforge:${emiVersion}:api")
+
+	implementation("com.klikli_dev:modonomicon-$jeiMcVersion-neoforge:${modonomiconVersion}")
+
+	libraries ("org.commonmark:commonmark:${commonmarkVersion}")
+	libraries ("org.commonmark:commonmark-ext-gfm-strikethrough:${commonmarkVersion}")
+	libraries ("org.commonmark:commonmark-ext-ins:${commonmarkVersion}")
+	//and include it in the jar
+	jarJar(group= "org.commonmark", name= "commonmark", version = "[${commonmarkVersion},)")
+	jarJar(group= "org.commonmark", name= "commonmark-ext-gfm-strikethrough", version= "[${commonmarkVersion},)")
+	jarJar(group= "org.commonmark", name= "commonmark-ext-ins", version= "[${commonmarkVersion},)")
 
 	// Testing
 	junitImplementation(platform("org.junit:junit-bom:${junitVersion}"))
