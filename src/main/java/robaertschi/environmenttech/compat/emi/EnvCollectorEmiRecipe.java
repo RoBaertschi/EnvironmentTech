@@ -1,3 +1,9 @@
+/*
+ *  EnvironmentTech  Copyright (C) 2024 Robin Bärtschi
+ *  This program comes with ABSOLUTELY NO WARRANTY; for details open the file LICENSE at the root of the source code.
+ *  This is free software, and you are welcome to redistribute it
+ *  under certain conditions; read the LICENSE file at the root of the source code for details.
+ */
 package robaertschi.environmenttech.compat.emi;
 
 import dev.emi.emi.api.recipe.BasicEmiRecipe;
@@ -5,7 +11,9 @@ import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
+
 import net.minecraft.network.chat.Component;
+
 import robaertschi.environmenttech.client.renderer.EnvStorageRenderer;
 import robaertschi.environmenttech.data.recipes.EnvCollectorRecipe;
 
