@@ -9,13 +9,11 @@ name: Java CI with Gradle
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "1.21.x" ]
-    if: "!startsWith(github.ref, 'refs/tags/')"
+  
   push:
     branches: [ "1.21.x" ]
     tags: "*"
-    if: "startsWith(github.ref, 'refs/tags/')"
+
   pull_request:
     branches: [ "1.21.x" ]
 
