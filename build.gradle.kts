@@ -8,6 +8,7 @@ plugins {
 	id("io.freefair.lombok") version "8.6"
 	id ("net.neoforged.gradle.userdev") version ("7.0.152")
 	id("com.diffplug.spotless") version "7.0.0.BETA1"
+	id("com.palantir.git-version") version "3.1.0"
 }
 
 val minecraftVersion: String by project
@@ -19,7 +20,6 @@ val loaderVersionRange: String by project
 val modId: String by project
 val modName: String by project
 val modLicense: String by project
-val modVersion: String by project
 val modGroupId: String by project
 val modAuthors: String by project
 val modDescription: String by project
@@ -41,6 +41,17 @@ enum class RecipeViewer {
 
 val withTop = true
 val recipeViewer: RecipeViewer = RecipeViewer.EMI
+
+val versionDetails: groovy.lang.Closure<com.palantir.gradle.gitversion.VersionDetails> by extra
+val details = versionDetails()
+
+val snapshot = "-SNAPSHOT"
+val subversion = ".${details.commitDistance}"
+val noTag = !details.lastTag.contains(Regex("""\d+\.\d+"""))
+val end = if (noTag) snapshot else "${details.commitDistance}${snapshot}"
+
+val modVersion: String = "${details.lastTag}${if (details.commitDistance > 0 || noTag) end else ""}"
+println(modVersion)
 
 version = modVersion
 group = modGroupId
