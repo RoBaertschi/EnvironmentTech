@@ -276,7 +276,7 @@ tasks.withType<ProcessResources>().configureEach {
 
 java {
 	withSourcesJar()
-	withJavadocJar()
+//	withJavadocJar()
 }
 
 // Example configuration to allow publishing using the maven-publish plugin
@@ -286,6 +286,7 @@ publishing {
 			pom {
 				licenses {
 					name = "GNU Lesser General Public License Version 3"
+					url = "https://www.gnu.org/licenses/lgpl-3.0.de.html"
 				}
 			}
 			from(components["java"])
