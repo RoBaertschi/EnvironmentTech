@@ -1,8 +1,18 @@
 /*
- *  EnvironmentTech  Copyright (C) 2024 Robin Bärtschi
- *  This program comes with ABSOLUTELY NO WARRANTY; for details open the file LICENSE at the root of the source code.
- *  This is free software, and you are welcome to redistribute it
- *  under certain conditions; read the LICENSE file at the root of the source code for details.
+ *  EnvironmentTech MC Mod
+    Copyright (C) 2024 Robin Bärtschi and Contributors
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Lesser General Public License as published by
+    the Free Software Foundation, by version 3 of the License.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 package robaertschi.environmenttech.client.renderer;
 

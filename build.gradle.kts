@@ -75,6 +75,7 @@ base {
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
+
 spotless {
 	format("misc") {
 		target("*.gradle.kts", ".gitattributes", ".gitignore")
@@ -273,19 +274,34 @@ tasks.withType<ProcessResources>().configureEach {
 
 }
 
+java {
+	withSourcesJar()
+	withJavadocJar()
+}
+
 // Example configuration to allow publishing using the maven-publish plugin
 publishing {
 	publications {
-		register<MavenPublication>("mavenJava") {
-			from (components["java"])
+		register<MavenPublication>("maven"){
+			pom {
+				licenses {
+					name = "GNU Lesser General Public License Version 3"
+				}
+			}
+			from(components["java"])
 		}
 	}
 	repositories {
-
 		maven {
-			url = project.projectDir.toURI()
+			val baseURL = "https://maven.robaertschi.xyz/"
+
+			url = uri("${baseURL}${if (version.toString().endsWith("SNAPSHOT")) "snapshots" else "releases"}")
 		}
 	}
+}
+
+tasks.javadoc {
+	(options as StandardJavadocDocletOptions).addBooleanOption("html5", true)
 }
 
 // IDEA no longer automatically downloads sources/javadoc jars for dependencies, so we need to explicitly enable the behavior.
