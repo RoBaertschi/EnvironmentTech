@@ -307,7 +307,12 @@ publishing {
 		maven {
 			val baseURL = "https://maven.robaertschi.xyz/"
 
+			name = "robaertschi"
 			url = uri("${baseURL}${if (version.toString().endsWith("SNAPSHOT")) "snapshots" else "releases"}")
+			credentials(PasswordCredentials::class)
+			authentication {
+				register<BasicAuthentication>("basic")
+			}
 		}
 	}
 }
