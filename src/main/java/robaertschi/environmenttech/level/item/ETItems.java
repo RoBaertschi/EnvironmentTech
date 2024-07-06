@@ -34,7 +34,7 @@ public class ETItems {
 //    public static final DeferredItem<BlockItem> EXAMPLE_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("example_block", EXAMPLE_BLOCK);
 
     public static final DeferredItem<BlockItem> ENV_COLLECTOR_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("env_collector", ETBlocks.ENV_COLLECTOR_BLOCK);
-    public static final DeferredItem<BlockItem> ENV_DISTRIBUTOR_ITEM = ITEMS.registerSimpleBlockItem("env_distributor", ETBlocks.ENV_DISTRIBUTOR_BLOCK);
+    public static final DeferredItem<BlockItem> ENV_DISTRIBUTOR_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("env_distributor", ETBlocks.ENV_DISTRIBUTOR_BLOCK);
 
     public static final DeferredItem<EnvDetectorItem> ENV_DETECTOR_ITEM = ITEMS.registerItem("env_detector",
             EnvDetectorItem::new,
@@ -55,7 +55,7 @@ public class ETItems {
             .icon(() -> ENV_COLLECTOR_BLOCK_ITEM.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(ENV_COLLECTOR_BLOCK_ITEM.get());
-                output.accept(ENV_DISTRIBUTOR_ITEM);
+                output.accept(ENV_DISTRIBUTOR_BLOCK_ITEM);
                 output.accept(ENV_DETECTOR_ITEM.get());
 //                output.accept(EXAMPLE_BLOCK_ITEM.get());
                 output.accept(ENVIRONMENTAL_ESSENCE_ITEM.get());

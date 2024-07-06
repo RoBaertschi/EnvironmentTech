@@ -39,9 +39,9 @@ public class ETRecipeProvider extends RecipeProvider {
                 new ItemStack(ETItems.ENVIRONMENTAL_ESSENCE_ITEM.get()),
                 10
         ).unlockedBy(
-                "iron_ingot",
-                InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT)
-        ).unlockedBy("env_collector", InventoryChangeTrigger.TriggerInstance.hasItems(ETItems.ENV_COLLECTOR_BLOCK_ITEM))
+                        "iron_ingot",
+                        InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT)
+                ).unlockedBy("env_collector", InventoryChangeTrigger.TriggerInstance.hasItems(ETItems.ENV_COLLECTOR_BLOCK_ITEM))
                 .save(recipeOutput);
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ETItems.GLASS_TANK)
@@ -66,6 +66,21 @@ public class ETRecipeProvider extends RecipeProvider {
                 .unlockedBy("hopper", InventoryChangeTrigger.TriggerInstance.hasItems(Items.HOPPER))
                 .save(recipeOutput, ET.id("env_collector_block_item"));
 
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ETItems.ENV_DISTRIBUTOR_BLOCK_ITEM)
+                .define('i', Items.IRON_INGOT)
+                .define('p', Items.OAK_PLANKS)
+                .define('g', ETItems.GLASS_TANK)
+                .define('e', ETItems.ENVIRONMENTAL_ESSENCE_ITEM)
+                .pattern("iei")
+                .pattern("ggg")
+                .pattern("ppp")
+                .unlockedBy("oak_planks", InventoryChangeTrigger.TriggerInstance.hasItems(Items.OAK_PLANKS))
+                .unlockedBy("iron_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.IRON_INGOT))
+                .unlockedBy("glass_tank", InventoryChangeTrigger.TriggerInstance.hasItems(ETItems.GLASS_TANK))
+                .unlockedBy("environmental_essence", InventoryChangeTrigger.TriggerInstance.hasItems(ETItems.ENVIRONMENTAL_ESSENCE_ITEM))
+                .save(recipeOutput, ET.id("env_distributor_block_item"));
+
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ETItems.ENV_DETECTOR_ITEM)
                 .define('t', ETItems.GLASS_TANK)
                 .define('s', Tags.Items.RODS_WOODEN)
@@ -77,5 +92,6 @@ public class ETRecipeProvider extends RecipeProvider {
                 .unlockedBy("hopper", InventoryChangeTrigger.TriggerInstance.hasItems(Items.HOPPER))
                 .unlockedBy("stick", InventoryChangeTrigger.TriggerInstance.hasItems(ItemPredicate.Builder.item().of(Tags.Items.RODS_WOODEN).build()))
                 .save(recipeOutput, ET.id("env_detector_item"));
+
     }
 }

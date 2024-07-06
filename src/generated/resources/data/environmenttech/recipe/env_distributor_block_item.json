@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "e": {
+      "item": "environmenttech:environmental_essence"
+    },
+    "g": {
+      "item": "environmenttech:glass_tank"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    },
+    "p": {
+      "item": "minecraft:oak_planks"
+    }
+  },
+  "pattern": [
+    "iei",
+    "ggg",
+    "ppp"
+  ],
+  "result": {
+    "count": 1,
+    "id": "environmenttech:env_distributor"
+  }
+}
