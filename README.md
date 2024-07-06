@@ -1,0 +1,1 @@
+[![CI](https://github.com/RoBaertschi/EnvironmentTech/actions/workflows/gradle.yml/badge.svg)](https://github.com/RoBaertschi/EnvironmentTech/actions/workflows/gradle.yml)
