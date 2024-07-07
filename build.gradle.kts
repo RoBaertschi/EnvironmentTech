@@ -51,7 +51,11 @@ val noTag = !details.lastTag.contains(Regex("""\d+\.\d+"""))
 val end = if (noTag) snapshot else "${details.commitDistance}${snapshot}"
 
 val modVersion: String = "${details.lastTag}${if (details.commitDistance > 0 || noTag) end else ""}"
+val release = details.commitDistance == 0 && !noTag
 println(modVersion)
+if (release) {
+	println("Building in Release Mode")
+}
 
 version = modVersion
 group = modGroupId
@@ -308,7 +312,7 @@ publishing {
 			val baseURL = "https://maven.robaertschi.xyz/"
 
 			name = "robaertschi"
-			url = uri("${baseURL}${if (version.toString().endsWith("SNAPSHOT")) "snapshots" else "releases"}")
+			url = uri("${baseURL}${if (!release) "snapshots" else "releases"}")
 			credentials(PasswordCredentials::class)
 			authentication {
 				register<BasicAuthentication>("basic")
