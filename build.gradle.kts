@@ -40,7 +40,7 @@ enum class RecipeViewer {
 }
 
 val withTop = true
-val recipeViewer: RecipeViewer = RecipeViewer.EMI
+val recipeViewer: RecipeViewer = RecipeViewer.JEI
 
 val versionDetails: groovy.lang.Closure<com.palantir.gradle.gitversion.VersionDetails> by extra
 val details = versionDetails()
