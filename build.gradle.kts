@@ -103,11 +103,11 @@ spotless {
 	java {
 		// Originally, this was from Kaupenjoe's repo, and was licensed by BluSunrize as the original code was from her, so we exclude it to not add our License Header
 		targetExclude(
-			"src/main/java/robaertschi/environmenttech/client/renderer/EnvStorageRenderer.java",
-			"src/main/java/robaertschi/environmenttech/utils/MouseUtils.java",
-			"src/main/java/robaertschi/environmenttech/client/RenderUtils.java"
+			"src/main/java/xyz/robaertschi/environmenttech/client/renderer/EnvStorageRenderer.java",
+			"src/main/java/xyz/robaertschi/environmenttech/utils/MouseUtils.java",
+			"src/main/java/xyz/robaertschi/environmenttech/client/RenderUtils.java"
 		)
-		importOrder("lombok", "java|javax", "", "net.minecraft", "com.mojang", "robaertschi", "\\#")
+		importOrder("lombok", "java|javax", "", "net.minecraft", "com.mojang", "xyz.robaertschi", "\\#")
 		removeUnusedImports()
 		licenseHeaderFile("HEADER.java")
 	}

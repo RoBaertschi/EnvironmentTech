@@ -1,8 +1,13 @@
 {
   "item.environmenttech.env_detector": "ENV Detector",
-  "item.environmenttech.environmental_essence": "Environmental Essence",
   "item.environmenttech.env_detector.tooltip": "The ENV Detector is a handy device that shows you how much ENV is available in the current chunk. It can display from 0 to 16 ENV.",
+  "item.environmenttech.environmental_essence": "Environmental Essence",
+  "item.environmenttech.glass_tank": "Glass Tank",
+
   "block.environmenttech.env_collector": "ENV Collector",
+  "block.environmenttech.env_distributor": "ENV Distributor",
+
+  "fluid_type.environmenttech.env": "ENV",
 
   "itemGroup.environmenttech": "Environment Tech",
 

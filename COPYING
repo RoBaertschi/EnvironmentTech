@@ -6,11 +6,12 @@ Some code might have a different license, if this is true, then there will be a 
 Other Licenses:
 - src
     - main
-        - robaertschi
-            - environmenttech
-                - client
-                    - renderer
-                        - EnvStorageRenderer.java = Blu's License of Common Sense
-                    - RenderUtils.java = LGPL-3.0
-                - utils
-                    - MouseUtils.java = MIT
+        - xyz
+            - robaertschi
+                - environmenttech
+                    - client
+                        - renderer
+                            - EnvStorageRenderer.java = Blu's License of Common Sense
+                        - RenderUtils.java = LGPL-3.0
+                    - utils
+                        - MouseUtils.java = MIT
