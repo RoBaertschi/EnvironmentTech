@@ -40,7 +40,7 @@ public class ETChunkEvents {
                 return;
             }
             int random = event.getLevel().getRandom().nextIntBetweenInclusive(Config.minEnvForNewChunk, Config.maxEnvForNewChunk);
-            log.debug("New Chunk at pos {}, set random to {}", event.getChunk().getPos(), random);
+//            log.debug("New Chunk at pos {}, set random to {}", event.getChunk().getPos(), random);
             event.getChunk().setData(ETAttachments.ENV, (long)random);
         } else if (!event.getChunk().hasData(ETAttachments.ENV)) {
             int random = event.getLevel().getRandom().nextIntBetweenInclusive(Config.minEnvForNewChunk, Config.maxEnvForNewChunk);

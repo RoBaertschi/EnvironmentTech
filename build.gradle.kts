@@ -6,7 +6,7 @@ plugins {
 	idea
 	`maven-publish`
 	id("io.freefair.lombok") version "8.6"
-	id ("net.neoforged.gradle.userdev") version ("7.0.152")
+	id ("net.neoforged.gradle.userdev") version ("7.0.153")
 	id("com.diffplug.spotless") version "7.0.0.BETA1"
 	id("com.palantir.git-version") version "3.1.0"
 }
@@ -48,7 +48,7 @@ val details = versionDetails()
 val snapshot = "-SNAPSHOT"
 val subversion = ".${details.commitDistance}"
 val noTag = !details.lastTag.contains(Regex("""\d+\.\d+"""))
-val end = if (noTag) snapshot else "${details.commitDistance}${snapshot}"
+val end = if (noTag) snapshot else ".${details.commitDistance}${snapshot}"
 
 val modVersion: String = "${details.lastTag}${if (details.commitDistance > 0 || noTag) end else ""}"
 val release = details.commitDistance == 0 && !noTag
