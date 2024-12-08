@@ -35,7 +35,6 @@ import net.minecraft.world.item.ItemStack;
 import xyz.robaertschi.environmenttech.ET;
 import xyz.robaertschi.environmenttech.data.recipes.ETRecipes;
 import xyz.robaertschi.environmenttech.level.block.ETBlocks;
-import xyz.robaertschi.environmenttech.level.block.entity.EnvCollectorBlockEntity;
 import xyz.robaertschi.environmenttech.menu.ETMenus;
 import xyz.robaertschi.environmenttech.menu.EnvCollectorMenu;
 
@@ -68,9 +67,9 @@ public class JeiCompatPlugin implements IModPlugin {
     @Override
     public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
         registration.addRecipeTransferHandler(EnvCollectorMenu.class, ETMenus.ENV_COLLECTOR_MENU.get(), EnvCollectorRecipeCategory.ENV_COLLECTOR,
-                EnvCollectorBlockEntity.SLOT_INPUT,
-                EnvCollectorBlockEntity.SLOT_INPUT_COUNT,
-                EnvCollectorBlockEntity.SLOT_COUNT,
+                0,
+                1,
+                2,
                 Inventory.INVENTORY_SIZE);
     }
 }

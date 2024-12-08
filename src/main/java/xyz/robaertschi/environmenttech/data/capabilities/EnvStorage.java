@@ -20,32 +20,18 @@ import net.minecraft.util.Mth;
 
 @SuppressWarnings("unused")
 public class EnvStorage implements IEnvStorage {
-    private final EnvType[] acceptedEnvTypes;
     private final long maxEnv;
     private long env;
     private final long maxTransfer;
 
-    public EnvStorage(EnvType acceptedEnvType, long maxEnv, long env, long maxTransfer) {
-        this.acceptedEnvTypes = new EnvType[1];
-        this.acceptedEnvTypes[0] = acceptedEnvType;
+    public EnvStorage(long maxEnv) {
+        this(maxEnv, 0, maxEnv);
+    }
+
+    public EnvStorage(long maxEnv, long env, long maxTransfer) {
         this.maxEnv = maxEnv;
         this.env = env;
         this.maxTransfer = maxTransfer;
-    }
-
-    public EnvStorage(EnvType acceptedEnvType, long maxEnv) {
-        this(acceptedEnvType, maxEnv, 0, maxEnv);
-    }
-
-    public EnvStorage(EnvType[] acceptedEnvTypes, long maxEnv, long env, long maxTransfer) {
-        this.acceptedEnvTypes = acceptedEnvTypes;
-        this.maxEnv = maxEnv;
-        this.env = env;
-        this.maxTransfer = maxTransfer;
-    }
-
-    public EnvStorage(EnvType[] acceptedEnvTypes, long maxEnv) {
-        this(acceptedEnvTypes, maxEnv, 0, maxEnv);
     }
 
     @Override
@@ -71,11 +57,6 @@ public class EnvStorage implements IEnvStorage {
     @Override
     public long getMaxEnv() {
         return maxEnv;
-    }
-
-    @Override
-    public EnvType[] canAcceptEnvType() {
-        return acceptedEnvTypes;
     }
 
     public void onContentsChanged() {}

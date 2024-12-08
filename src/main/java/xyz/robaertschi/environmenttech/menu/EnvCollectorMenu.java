@@ -31,10 +31,9 @@ import net.minecraft.world.item.ItemStack;
 import xyz.robaertschi.environmenttech.level.block.ETBlocks;
 import xyz.robaertschi.environmenttech.level.block.entity.EnvCollectorBlockEntity;
 
-import static xyz.robaertschi.environmenttech.level.block.entity.EnvCollectorBlockEntity.SLOT_COUNT;
-import static xyz.robaertschi.environmenttech.level.block.entity.EnvCollectorBlockEntity.SLOT_INPUT;
+import static xyz.robaertschi.environmenttech.level.block.entity.EnvCollectorBlockEntity.*;
 
-@SuppressWarnings("SameParameterValue")
+@SuppressWarnings("ALL")
 public class EnvCollectorMenu extends AbstractContainerMenu {
 
     @Getter
@@ -49,12 +48,11 @@ public class EnvCollectorMenu extends AbstractContainerMenu {
         super(ETMenus.ENV_COLLECTOR_MENU.get(), pContainerId);
         this.blockEntity = blockEntity;
         this.data = data;
-        addSlot(new SlotItemHandler(blockEntity.getInputInventory(), 0, 54, 34));
-        addSlot(new SlotItemHandler(blockEntity.getOutputInventory(), 0, 116, 35));
+        addSlot(new ModifiableSlotItemHandler(blockEntity.getInventory().get(), 0, 54, 34));
+        addSlot(new SlotItemHandler(blockEntity.getInventory().get(), 1, 116, 35));
 
 
         layoutPlayerInventorySlots(player.getInventory(), 8, 84);
-
 
         addDataSlots(data);
     }
@@ -107,7 +105,7 @@ public class EnvCollectorMenu extends AbstractContainerMenu {
                 }
             }
 
-            if (!this.moveItemStackTo(stack, SLOT_INPUT, SLOT_INPUT+1, false)) {
+            if (!this.moveItemStackTo(stack, SLOT_INPUT, SLOT_INPUT_COUNT, false)) {
                 if (pIndex < 27 + SLOT_COUNT) {
                     if (!this.moveItemStackTo(stack, 27 + SLOT_COUNT, 36 + SLOT_COUNT, false)) {
                         return ItemStack.EMPTY;

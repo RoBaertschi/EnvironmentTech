@@ -16,11 +16,10 @@
  */
 package xyz.robaertschi.environmenttech.compat.jei;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -79,11 +78,8 @@ public class EnvCollectorRecipeCategory implements IRecipeCategory<RecipeHolder<
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<EnvCollectorRecipe> recipeHolder, IFocusGroup focuses) {
         EnvCollectorRecipe recipe = recipeHolder.value();
-
         builder.addSlot(RecipeIngredientRole.INPUT, 6, 16).addIngredients(recipe.input());
-
         builder.addSlot(RecipeIngredientRole.OUTPUT, 68, 17).addItemStack(recipe.output());
-
     }
 
     @Override
@@ -93,15 +89,11 @@ public class EnvCollectorRecipeCategory implements IRecipeCategory<RecipeHolder<
     }
 
     @Override
-    public List<Component> getTooltipStrings(RecipeHolder<EnvCollectorRecipe> recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
-        List<Component> components = new ArrayList<>();
-
+    public void getTooltip(ITooltipBuilder builder, RecipeHolder<EnvCollectorRecipe> recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         int x = getWidth() - 10;
         if (MouseUtils.isMouseOver(Mth.floor(mouseX), Mth.floor(mouseY), x, 2, 8, 45)) {
-            components.add(Component.literal(recipe.value().envUsed() + " / " + 64 + " ENV"));
+            builder.add(Component.literal(recipe.value().envUsed() + " / " + 64 + " ENV"));
         }
-
-        return components;
     }
 
 

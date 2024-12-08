@@ -38,7 +38,6 @@ import net.minecraft.world.level.chunk.ChunkAccess;
 import xyz.robaertschi.environmenttech.ET;
 import xyz.robaertschi.environmenttech.data.attachments.ETAttachments;
 import xyz.robaertschi.environmenttech.data.capabilities.EnvStorage;
-import xyz.robaertschi.environmenttech.data.capabilities.EnvType;
 
 
 @Getter
@@ -51,7 +50,7 @@ public class EnvDistributorBlockEntity extends BlockEntity implements ITickableB
     private int ticksBetweenProcessTick = 0;
 
     public static final String ENV_TAG = "Env";
-    private final EnvStorage envStorage = new EnvStorage(EnvType.Chunk, 64) {
+    private final EnvStorage envStorage = new EnvStorage(64) {
         @Override
         public void onContentsChanged() {
             EnvDistributorBlockEntity.this.setChanged();

@@ -23,6 +23,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 import xyz.robaertschi.environmenttech.ET;
+import xyz.robaertschi.environmenttech.level.block.generators.HeatGeneratorBlock;
 
 
 public class ETBlocks {
@@ -31,7 +32,8 @@ public class ETBlocks {
     // Creates a new Block with the id "environmenttech:example_block", combining the namespace and path
 //    public static final DeferredBlock<Block> EXAMPLE_BLOCK = BLOCKS.registerSimpleBlock("example_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     public static final DeferredBlock<EnvCollectorBlock> ENV_COLLECTOR_BLOCK = BLOCKS.registerBlock("env_collector", EnvCollectorBlock::new, BlockBehaviour.Properties.of());
-    public static final DeferredBlock<EnvDistributorBlock> ENV_DISTRIBUTOR_BLOCK =BLOCKS.registerBlock("env_distributor", EnvDistributorBlock::new, BlockBehaviour.Properties.of());
+    public static final DeferredBlock<EnvDistributorBlock> ENV_DISTRIBUTOR_BLOCK = BLOCKS.registerBlock("env_distributor", EnvDistributorBlock::new, BlockBehaviour.Properties.of());
+    public static final DeferredBlock<HeatGeneratorBlock> HEAT_GENERATOR_BLOCK = BLOCKS.registerBlock("heat_generator", HeatGeneratorBlock::new, BlockBehaviour.Properties.of());
 
 
     public static void init(IEventBus iEventBus) {

@@ -27,11 +27,13 @@ import xyz.robaertschi.environmenttech.ET;
 import xyz.robaertschi.environmenttech.level.block.entity.ETBlockEntities;
 
 public class ETCapabilities {
-    public static final BlockCapability<IEnvStorage, EnvType> ENV_STORAGE_BLOCK =
-            BlockCapability.create(ET.id("env_storage"),
-                    IEnvStorage.class,
-                    EnvType.class
-                    );
+    public static final BlockCapability<IEnvStorage, Void> ENV_STORAGE_BLOCK =
+            BlockCapability.createVoid(ET.id("env_storage"),
+                    IEnvStorage.class);
+
+    public static final BlockCapability<IBundledEnvStorage, Direction> ENV_BUNDLED_STORAGE_BLOCK =
+            BlockCapability.create(ET.id("env_bundled_storage"),
+                    IBundledEnvStorage.class, Direction.class);
 
     public static void init(IEventBus iEventBus) {
         iEventBus.addListener(ETCapabilities::registerCapabilities);
@@ -55,19 +57,13 @@ public class ETCapabilities {
         event.registerBlockEntity(
                 ENV_STORAGE_BLOCK,
                 ETBlockEntities.ENV_COLLECTOR_BLOCK_ENTITY.get(),
-                (object, context) -> {
-                    if (context == EnvType.Chunk) return object.getEnvStorage();
-                    return null;
-                }
+                (object, context) -> object.getEnvStorage()
         );
 
         event.registerBlockEntity(
                 ENV_STORAGE_BLOCK,
                 ETBlockEntities.ENV_DISTRIBUTOR_BLOCK_ENTITY.get(),
-                (object, context) -> {
-                    if (context == EnvType.Chunk) return object.getEnvStorage();
-                    return null;
-                }
+                (object, context) -> object.getEnvStorage()
         );
     }
 

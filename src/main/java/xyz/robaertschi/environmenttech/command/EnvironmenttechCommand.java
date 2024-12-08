@@ -21,6 +21,7 @@ import net.neoforged.neoforge.server.command.EnumArgument;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.coordinates.BlockPosArgument;
 import net.minecraft.commands.arguments.coordinates.WorldCoordinates;
+import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -31,11 +32,12 @@ import com.mojang.brigadier.arguments.LongArgumentType;
 
 import xyz.robaertschi.environmenttech.data.attachments.ETAttachments;
 import xyz.robaertschi.environmenttech.data.capabilities.ETCapabilities;
-import xyz.robaertschi.environmenttech.data.capabilities.EnvType;
 
 import static net.minecraft.commands.Commands.*;
 
+@SuppressWarnings("resource")
 public class EnvironmenttechCommand {
+
     public EnvironmenttechCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
                 literal("environmenttech")
@@ -64,19 +66,33 @@ public class EnvironmenttechCommand {
 
                             return 1;
                         }))
-                        .then(literal("set_env").then(argument("pos", BlockPosArgument.blockPos()).then(argument("env_type", EnumArgument.enumArgument(EnvType.class)).then(argument("amount", LongArgumentType.longArg(0)).executes(
+                        .then(literal("set_env").then(argument("pos", BlockPosArgument.blockPos()).then(argument("amount", LongArgumentType.longArg(0)).executes(
                                 context -> {
                                     WorldCoordinates pos = context.getArgument("pos", WorldCoordinates.class);
-                                    EnvType type = context.getArgument("env_type", EnvType.class);
                                     long amount = context.getArgument("amount", Long.class);
-                                    var cap = context.getSource().getPlayerOrException().level().getCapability(ETCapabilities.ENV_STORAGE_BLOCK, pos.getBlockPos(context.getSource()), type);
+
+                                    var cap = context.getSource().getPlayerOrException().level().getCapability(ETCapabilities.ENV_STORAGE_BLOCK, pos.getBlockPos(context.getSource()));
                                     if (cap != null) {
                                         cap.receiveEnv(amount, false);
                                     }
 
                                     return 1;
                                 }
-                        )))))
+                        )).then(literal("set_bundled_env").then(argument("pos", BlockPosArgument.blockPos()).then(argument("direction", EnumArgument.enumArgument(Direction.class)).then(argument("amount", LongArgumentType.longArg(0)).executes(
+                                context -> {
+                                    WorldCoordinates pos = context.getArgument("pos", WorldCoordinates.class);
+                                    long amount = context.getArgument("amount", Long.class);
+                                    Direction direction = context.getArgument("direction", Direction.class);
+
+                                    var cap = context.getSource().getPlayerOrException().level().getCapability(ETCapabilities.ENV_BUNDLED_STORAGE_BLOCK, pos.getBlockPos(context.getSource()), direction);
+                                    if (cap != null) {
+                                        cap.receiveEnv(amount, false);
+                                    }
+
+                                    return 1;
+                                }
+                                )))))
+                        ))
         );
     }
 }

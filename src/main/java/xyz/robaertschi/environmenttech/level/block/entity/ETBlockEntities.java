@@ -41,6 +41,11 @@ public class ETBlockEntities {
             BLOCK_ENTITIES.register("env_distributor",
                     () -> BlockEntityType.Builder.of(EnvDistributorBlockEntity::new, ETBlocks.ENV_DISTRIBUTOR_BLOCK.get()).build(null));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HeatGeneratorBlockEntity>> HEAT_GENERATOR_BLOCK_ENTITY =
+            BLOCK_ENTITIES.register("heat_generator",
+                    () -> BlockEntityType.Builder.of(HeatGeneratorBlockEntity::new, ETBlocks.HEAT_GENERATOR_BLOCK.get()).build(null)
+            );
+
     public static void init(IEventBus iEventBus) {
         BLOCK_ENTITIES.register(iEventBus);
     }

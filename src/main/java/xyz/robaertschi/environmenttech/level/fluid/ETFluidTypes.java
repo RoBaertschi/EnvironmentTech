@@ -16,17 +16,16 @@
  */
 package xyz.robaertschi.environmenttech.level.fluid;
 
-import java.util.function.Consumer;
-import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 
-import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.resources.ResourceLocation;
 
 import xyz.robaertschi.environmenttech.ET;
@@ -43,32 +42,30 @@ public class ETFluidTypes {
     public static final DeferredHolder<FluidType, FluidType> ENV = FLUID_TYPES.register("env",
             resourceLocation -> new FluidType(
                     FluidType.Properties.create().density(15).viscosity(5)
-            ) {
-                @Override
-                @MethodsReturnNonnullByDefault
-                @ParametersAreNonnullByDefault
-                public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
-                    consumer.accept(new IClientFluidTypeExtensions() {
-                        @Override
-                        public int getTintColor() {
-                            return EnvStorageRenderer.to;
-                        }
-
-                        @Override
-                        public ResourceLocation getFlowingTexture() {
-                            return WATER_FLOWING_RL;
-                        }
-
-                        @Override
-                        public ResourceLocation getStillTexture() {
-                            return WATER_STILL_RL;
-                        }
-                    });
-                }
-            }
+            )
     );
 
+    public static void registerClientExtensionsEvent(RegisterClientExtensionsEvent event) {
+        event.registerFluidType(new IClientFluidTypeExtensions() {
+            @Override
+            public int getTintColor() {
+                return EnvStorageRenderer.to;
+            }
+
+            @Override
+            public @NotNull ResourceLocation getFlowingTexture() {
+                return WATER_FLOWING_RL;
+            }
+
+            @Override
+            public @NotNull ResourceLocation getStillTexture() {
+                return WATER_STILL_RL;
+            }
+        }, ENV);
+    }
+
     public static void init(IEventBus modEventBus) {
+        modEventBus.addListener(ETFluidTypes::registerClientExtensionsEvent);
         FLUID_TYPES.register(modEventBus);
     }
 }

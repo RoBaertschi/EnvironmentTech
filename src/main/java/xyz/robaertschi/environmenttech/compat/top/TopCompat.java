@@ -24,6 +24,7 @@ import net.neoforged.fml.InterModComms;
 import net.neoforged.fml.event.lifecycle.InterModEnqueueEvent;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
@@ -34,7 +35,7 @@ import xyz.robaertschi.environmenttech.ET;
 import xyz.robaertschi.environmenttech.EnvironmentTech;
 import xyz.robaertschi.environmenttech.client.renderer.EnvStorageRenderer;
 import xyz.robaertschi.environmenttech.data.capabilities.ETCapabilities;
-import xyz.robaertschi.environmenttech.data.capabilities.EnvType;
+import xyz.robaertschi.environmenttech.data.capabilities.IBundledEnvStorage;
 import xyz.robaertschi.environmenttech.data.capabilities.IEnvStorage;
 
 public class TopCompat {
@@ -54,7 +55,8 @@ public class TopCompat {
             probe = theOneProbe;
             EnvironmentTech.LOGGER.info("Enabled TheOneProbe support");
             theOneProbe.registerProvider(new IProbeInfoProvider() {
-                private BlockCapabilityCache<IEnvStorage, EnvType> capCache = null;
+                private BlockCapabilityCache<IEnvStorage, Void> capCache = null;
+                private BlockCapabilityCache<IBundledEnvStorage, Direction> bundledCapCache = null;
 
                 @Override
                 public ResourceLocation getID() {
@@ -71,14 +73,11 @@ public class TopCompat {
                     if (!(level instanceof ServerLevel)) return;
 
                     if (capCache == null || !capCache.pos().equals(iProbeHitData.getPos())) {
-                        capCache = BlockCapabilityCache.create(ETCapabilities.ENV_STORAGE_BLOCK, (ServerLevel) level, iProbeHitData.getPos(), EnvType.Normal);
-                        // Try other env types
-                        if (capCache.getCapability() == null) {
-                            capCache = BlockCapabilityCache.create(ETCapabilities.ENV_STORAGE_BLOCK, (ServerLevel) level, iProbeHitData.getPos(), EnvType.Bundled);
-                        }
-                        if (capCache.getCapability() == null) {
-                            capCache = BlockCapabilityCache.create(ETCapabilities.ENV_STORAGE_BLOCK, (ServerLevel) level, iProbeHitData.getPos(), EnvType.Chunk);
-                        }
+                        capCache = BlockCapabilityCache.create(ETCapabilities.ENV_STORAGE_BLOCK, (ServerLevel) level, iProbeHitData.getPos(), null);
+                    }
+                    // Try other env types
+                    if (bundledCapCache == null || !capCache.pos().equals(iProbeHitData.getPos())) {
+                        bundledCapCache = BlockCapabilityCache.create(ETCapabilities.ENV_BUNDLED_STORAGE_BLOCK, (ServerLevel) level, iProbeHitData.getPos(), null);
                     }
 
                     IEnvStorage cap = capCache.getCapability();
@@ -88,6 +87,15 @@ public class TopCompat {
                                 .alternateFilledColor(EnvStorageRenderer.to)
                                 .suffix(" ENV");
                         iProbeInfo.horizontal().progress(cap.getEnvStored(),cap.getMaxEnv(), style);
+                    }
+
+                    IBundledEnvStorage bundledCap = bundledCapCache.getCapability();
+                    if (bundledCap != null) {
+                        var style = iProbeInfo.defaultProgressStyle()
+                                .filledColor(EnvStorageRenderer.from)
+                                .alternateFilledColor(EnvStorageRenderer.to)
+                                .suffix(" Bundled ENV");
+                        iProbeInfo.horizontal().progress(bundledCap.getEnvStored(), bundledCap.getMaxEnv(), style);
                     }
                 }
             });

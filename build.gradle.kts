@@ -2,13 +2,16 @@ import java.net.URI
 
 plugins {
 	`java-library`
-	eclipse
 	idea
 	`maven-publish`
 	id("io.freefair.lombok") version "8.6"
-	id ("net.neoforged.gradle.userdev") version ("7.0.153")
 	id("com.diffplug.spotless") version "7.0.0.BETA1"
 	id("com.palantir.git-version") version "3.1.0"
+	id ("net.neoforged.gradle.userdev") version ("7.0.171")
+}
+
+tasks.named<Wrapper>("wrapper") {
+	distributionType = Wrapper.DistributionType.BIN
 }
 
 val minecraftVersion: String by project
@@ -46,7 +49,6 @@ val versionDetails: groovy.lang.Closure<com.palantir.gradle.gitversion.VersionDe
 val details = versionDetails()
 
 val snapshot = "-SNAPSHOT"
-val subversion = ".${details.commitDistance}"
 val noTag = !details.lastTag.contains(Regex("""\d+\.\d+"""))
 val end = if (noTag) snapshot else ".${details.commitDistance}${snapshot}"
 
@@ -179,7 +181,8 @@ runs {
 
 	create("server") {
 		systemProperty ("forge.enabledGameTestNamespaces", modId)
-		programArgument ("--nogui")
+
+		argument("--nogui")
 	}
 
 	// This run config launches GameTestServer and runs all registered gametests, then exits.
@@ -187,7 +190,6 @@ runs {
 	// The gametest system is also enabled by default for other run configs under the /test command.
 	create("gameTestServer") {
 		systemProperty ("forge.enabledGameTestNamespaces", modId)
-
 	}
 
 
@@ -196,7 +198,7 @@ runs {
 		// workingDirectory project.file("run-data")
 
 		// Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-		programArguments.addAll ("--mod", modId, "--all", "--output", file("src/generated/resources/").absolutePath, "--existing", file("src/main/resources/").absolutePath)
+		arguments.addAll ("--mod", modId, "--all", "--output", file("src/generated/resources/").absolutePath, "--existing", file("src/main/resources/").absolutePath)
 	}
 
 }

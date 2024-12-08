@@ -55,7 +55,6 @@ import xyz.robaertschi.environmenttech.compat.top.TOPInfoProvider;
 import xyz.robaertschi.environmenttech.data.attachments.ETAttachments;
 import xyz.robaertschi.environmenttech.data.capabilities.AdaptedItemHandler;
 import xyz.robaertschi.environmenttech.data.capabilities.EnvStorage;
-import xyz.robaertschi.environmenttech.data.capabilities.EnvType;
 import xyz.robaertschi.environmenttech.data.recipes.ETRecipes;
 import xyz.robaertschi.environmenttech.data.recipes.EnvCollectorRecipe;
 import xyz.robaertschi.environmenttech.menu.EnvCollectorMenu;
@@ -87,7 +86,7 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
         }
     };
     @Getter
-    private final ItemStackHandler outputInventory = new ItemStackHandler(SLOT_INPUT_COUNT) {
+    private final ItemStackHandler outputInventory = new ItemStackHandler(SLOT_OUTPUT_COUNT) {
         protected void onContentsChanged(int slot) {
             EnvCollectorBlockEntity.this.setChanged();
             assert level != null;
@@ -133,7 +132,7 @@ public class EnvCollectorBlockEntity extends BlockEntity implements MenuProvider
 
 
     @Getter
-    private final EnvStorage envStorage = new EnvStorage(EnvType.Chunk, 64, 0, 1) {
+    private final EnvStorage envStorage = new EnvStorage(64, 0, 1) {
         @Override
         public void onContentsChanged() {
             EnvCollectorBlockEntity.this.setChanged();
