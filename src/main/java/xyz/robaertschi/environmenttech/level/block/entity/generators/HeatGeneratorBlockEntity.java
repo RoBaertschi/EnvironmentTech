@@ -14,7 +14,7 @@
     You should have received a copy of the GNU Lesser General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-package xyz.robaertschi.environmenttech.level.block.entity;
+package xyz.robaertschi.environmenttech.level.block.entity.generators;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +31,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import xyz.robaertschi.environmenttech.ET;
 import xyz.robaertschi.environmenttech.data.capabilities.EnvStorage;
+import xyz.robaertschi.environmenttech.level.block.entity.ETBlockEntities;
+import xyz.robaertschi.environmenttech.level.block.entity.ITickableBlockEntity;
 
 public class HeatGeneratorBlockEntity extends BlockEntity implements ITickableBlockEntity {
     private static final HashMap<Block, Long> BLOCK_TO_ENV = new HashMap<>(Map.of(Blocks.TORCH, 1L, Blocks.FIRE, 3L, Blocks.CAMPFIRE, 5L, Blocks.SOUL_TORCH, 6L, Blocks.SOUL_FIRE, 8L, Blocks.SOUL_CAMPFIRE, 10L, Blocks.LAVA, 14L));

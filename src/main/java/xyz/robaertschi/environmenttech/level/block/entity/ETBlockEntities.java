@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 
 import xyz.robaertschi.environmenttech.ET;
 import xyz.robaertschi.environmenttech.level.block.ETBlocks;
+import xyz.robaertschi.environmenttech.level.block.entity.generators.HeatGeneratorBlockEntity;
 
 
 @SuppressWarnings("DataFlowIssue")

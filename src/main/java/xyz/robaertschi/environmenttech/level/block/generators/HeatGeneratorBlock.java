@@ -30,7 +30,7 @@ import com.mojang.serialization.MapCodec;
 
 import xyz.robaertschi.environmenttech.level.block.SimpleBlockWithEntity;
 import xyz.robaertschi.environmenttech.level.block.entity.ETBlockEntities;
-import xyz.robaertschi.environmenttech.level.block.entity.HeatGeneratorBlockEntity;
+import xyz.robaertschi.environmenttech.level.block.entity.generators.HeatGeneratorBlockEntity;
 
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
