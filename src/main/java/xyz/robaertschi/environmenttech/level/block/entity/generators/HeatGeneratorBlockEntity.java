@@ -19,6 +19,8 @@ package xyz.robaertschi.environmenttech.level.block.entity.generators;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.jetbrains.annotations.NotNull;
+
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -28,7 +30,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-import org.jetbrains.annotations.NotNull;
 import xyz.robaertschi.environmenttech.ET;
 import xyz.robaertschi.environmenttech.data.capabilities.EnvStorage;
 import xyz.robaertschi.environmenttech.level.block.entity.ETBlockEntities;
