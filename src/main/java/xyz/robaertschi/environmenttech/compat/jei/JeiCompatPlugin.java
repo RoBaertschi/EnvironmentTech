@@ -54,7 +54,6 @@ public class JeiCompatPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-
         assert Minecraft.getInstance().level != null;
         registration.addRecipes(EnvCollectorRecipeCategory.ENV_COLLECTOR, Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(ETRecipes.ENV_COLLECTOR_RECIPE_TYPE.get()).stream().toList());
     }
